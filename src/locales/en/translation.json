@@ -1,0 +1,81 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About Me",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "subtitle": "Passionate about creating functional and engaging digital experiences",
+    "button": "View Projects"
+  },
+  "about": 
+  {
+    "title": "About Me",
+    "description": "Hi! I'm Juanpa, a software developer passionate about creating functional, accessible, and personality-filled digital experiences.",
+    "bio": "I'm studying Computer Engineering at TEC of Costa Rica and have worked on real and academic projects, both web and mobile. I'm interested in user-centered design, good practices, and learning more every day.",
+    "location": "Costa Rica",
+    "rol": "Software Engineer",
+    "major": "Software Engineering",
+    "languages": "Spanish, English",
+    "references": "References",
+    "referencesDescription#1": "\"Working with Juanpa was an excellent experience. He always proposes creative solutions and knows how to listen.\"",
+    "referencesDescription#2": "\"Juanpa is responsible, organized, and has great ability to solve technical problems calmly.\"",
+    "timeline": {
+      "2024": {
+        "description": "2024 - Started freelance projects and professional portfolio"
+      },
+      "2023": {
+        "description": "2023 - Published my first mobile app with Expo + Firebase"
+      },
+      "2021": {
+        "description": "2021 — Began my journey in Computer Engineering"
+      }
+    },
+    "button": "Download CV"
+  },
+  "projects": {
+    "title": "Projects",
+    "type": {
+      "all": "All",
+      "personal": "Personal",
+      "desktop": "Freelance",
+      "mobile": "Work"
+    },
+    "titles": {
+      "project1": "Campo App",
+      "project2": "Installers Website",
+      "project3": "Animated Portfolio"
+    },
+    "descriptions": {
+      "project1": "Mobile app to classify agricultural land based on national technical criteria.",
+      "project2": "Professional landing page for an internet installation company.",
+      "project3": "Experimental portfolio design with custom animations."
+    },
+    "button": "View Project ↗",
+    "status": {
+      "desing": "In progress",
+      "development": "Completed",
+      "published": "Published"
+    }
+  },
+  "contact": {
+    "title": "Contact!",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "button": "Send Message"
+    },
+    "social": {
+      "title": "My Networks:",
+      "button": "View Profile →",
+      "mail": "Send Email →"
+    },
+    "footer": "© 2025 Juanpa Quesada Caballero. All rights reserved."
+  },
+  "messages": {
+    "success": "Message sent successfully!",
+    "error": "Error sending message. Please try again later."
+  }
+}

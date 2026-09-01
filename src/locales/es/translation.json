@@ -1,0 +1,82 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "home": {
+    "subtitle": "Apasionado por crear experiencias digitales funcionales y atractivas",
+    "button": "Ver proyectos"
+  },
+  "about": 
+  {
+    "title": "Sobre mí",
+    "description": "¡Hola! Soy Juanpa, desarrollador de software apasionado por crear experiencias digitales funcionales, accesibles y con personalidad.",
+    "bio": "Estudio Ingeniería en Computación en el TEC de Costa Rica y he trabajado en proyectos reales y académicos, tanto en web como en móvil. Me interesa el diseño centrado en el usuario, las buenas prácticas y seguir aprendiendo cada día.",
+    "location": "Costa Rica",
+    "rol": "Software Engineer",
+    "major": "Ingeniería en Computación",
+    "languages": "Español, Inglés",
+    "references": "Referencias",
+    "referencesDescription#1": "\"Trabajar con Juanpa fue una experiencia excelente. Siempre propone soluciones creativas y sabe escuchar.\"",
+    "referencesDescription#2": "\"Juanpa es responsable, ordenado y tiene una gran capacidad para resolver problemas técnicos con calma.\"",
+    "timeline": {
+        "2024": {
+          "description": "2024 - Inicié proyectos freelance y portafolio profesional"
+        },
+        "2023": {
+          "description": "2023 - Publiqué mi primera app móvil con Expo + Firebase"
+        },
+        "2021": {
+          "description": "2021 — Empecé mi carrera en Ingeniería en Computación"
+        }
+    },
+    "button": "Descargar CV"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "type": {
+      "all": "Todos",
+      "personal": "Personal",
+      "desktop": "Freelance",
+      "mobile": "Trabajo"
+    },
+    "titles": {
+      "project1": "Campo App",
+      "project2": "Sitio Web Instaladores",
+      "project3": "Portfolio Animado"
+    },
+    "descriptions": {
+      "project1": "App móvil para clasificar terrenos agrícolas según criterios técnicos nacionales.",
+      "project2": "Landing page profesional para empresa de instalación de internet.",
+      "project3": "Diseño experimental de portafolio con animaciones personalizadas."
+    },
+    "button": "Ver Proyecto ↗",
+    "status": {
+      "desing": "En progreso",
+      "development": "Completado",
+      "published": "Publicado"
+    }
+  },
+  "contact": {
+    "title": "¡Contactame!",
+    "form": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "button": "Enviar Mensaje"
+    },
+    "social": {
+      "title": "Mis Redes:",
+      "button": "Ver perfil →",
+      "mail": "Enviar correo →"
+    },
+    "footer": "© 2025 Juanpa Quesada Caballero. Todos los derechos reservados."
+  },
+  "messages": {
+    "success": "¡Mensaje enviado con éxito!",
+    "error": "Error al enviar el mensaje. Por favor, inténtalo de nuevo."
+  }
+}
+  
