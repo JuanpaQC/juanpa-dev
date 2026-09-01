@@ -29,3 +29,9 @@ dist-ssr
 
 # Claude Code
 .claude/settings.local.json
+
+# Originales pesados de imagen. Viven fuera del repo, en
+# ~/Documents/portafolio-juanpa-originales/
+# Lo que se sirve son los derivados de src/assets/opt/ y /public.
+src/assets/*.jpg
+src/assets/*.jpeg
