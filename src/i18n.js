@@ -19,4 +19,13 @@ i18n
     },
   });
 
+// El atributo lang del <html> tiene que seguir al idioma real de la interfaz:
+// sin esto un lector de pantalla lee el español con pronunciación inglesa (WCAG 3.1.1).
+const syncHtmlLang = (lng) => {
+  document.documentElement.lang = lng;
+};
+
+syncHtmlLang(i18n.language);
+i18n.on("languageChanged", syncHtmlLang);
+
 export default i18n;

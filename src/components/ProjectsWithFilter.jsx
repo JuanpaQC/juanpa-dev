@@ -22,7 +22,7 @@ const techIcons = {
   React: <FaReact className="text-cyan-400 text-2xl" />,
   Firebase: <SiFirebase className="text-yellow-400 text-2xl" />,
   Tailwind: <SiTailwindcss className="text-sky-400 text-2xl" />,
-  Expo: <SiExpo className="text-white text-2xl" />,
+  Expo: <SiExpo className="text-light-text dark:text-white text-2xl" />,
   Netlify : <SiNetlify className="text-cyan-400 text-2xl" />,
   "Framer Motion": <SiFramer className="text-fuchsia-500 text-2xl" />,
   JavaScript: <FaJsSquare className="text-yellow-300 text-2xl" />,
@@ -89,7 +89,7 @@ export default function ProjectsWithFilter() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.4 }}
         transition={{ duration: 0.8 }}
-        className="text-3xl md:text-4xl font-bold mb-8 text-center text-dark-accent"
+        className="text-3xl md:text-4xl font-bold mb-8 text-center text-light-accent dark:text-dark-accent"
       >
         {t("projects.title")}
       </motion.h2>
@@ -108,8 +108,8 @@ export default function ProjectsWithFilter() {
             onClick={() => setActiveCategory(category.key)}
             className={`px-4 py-2 rounded-full border transition text-sm font-semibold ${
               activeCategory === category.key
-                ? "bg-dark-accent text-black"
-                : "border-dark-accent text-dark-accent hover:bg-dark-accent hover:text-black"
+                ? "bg-light-accent text-white dark:bg-dark-accent dark:text-black"
+                : "border-light-accent dark:border-dark-accent text-light-accent dark:text-dark-accent hover:bg-light-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-black"
             }`}
           >
             {category.label}
@@ -127,10 +127,10 @@ export default function ProjectsWithFilter() {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ scale: 1.03 }}
-            className="relative rounded-xl shadow-lg overflow-hidden border border-gray-500 bg-[#1e1e1e] dark:bg-[#1e1e1e] hover:z-10"
+            className="relative rounded-xl shadow-lg overflow-hidden border border-light-border dark:border-gray-500 bg-light-surface dark:bg-[#1e1e1e] hover:z-10"
           >
             {/* Header estilo ventana Mac */}
-            <div className="flex gap-2 px-3 py-2 bg-[#2c2c2e] border-b border-gray-600">
+            <div className="flex gap-2 px-3 py-2 bg-light-border dark:bg-[#2c2c2e] border-b border-light-border dark:border-gray-600">
               <span className="w-3 h-3 rounded-full bg-red-500"></span>
               <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
               <span className="w-3 h-3 rounded-full bg-green-500"></span>
@@ -138,8 +138,8 @@ export default function ProjectsWithFilter() {
 
             {/* Contenido principal del proyecto */}
             <div className="p-5 space-y-3">
-              <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-              <p className="text-sm text-dark-subtle dark:text-dark-subtle">{project.description}</p>
+              <h3 className="text-xl font-semibold text-light-text dark:text-white">{project.title}</h3>
+              <p className="text-sm text-light-subtle dark:text-dark-subtle">{project.description}</p>
 
               {/* Tecnologías usadas */}
               <div className="flex flex-wrap gap-3 mt-2">
@@ -156,7 +156,7 @@ export default function ProjectsWithFilter() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block mt-3 text-sm text-dark-accent hover:underline"
+                  className="inline-block mt-3 text-sm text-light-accent dark:text-dark-accent hover:underline"
                 >
                   {t("projects.button")}
                 </a>
@@ -164,10 +164,10 @@ export default function ProjectsWithFilter() {
             </div>
 
             {/* Mini timeline fuera de la tarjeta */}
-            <div className="px-5 pt-4 pb-5 border-t border-gray-700">
+            <div className="px-5 pt-4 pb-5 border-t border-light-border dark:border-gray-700">
               <div className="flex items-center justify-between">
                 {stages.map((stage, i) => (
-                  <div key={i} className="flex-1 flex flex-col items-center text-[10px] text-dark-subtle relative">
+                  <div key={i} className="flex-1 flex flex-col items-center text-[10px] text-light-subtle dark:text-dark-subtle relative">
                     {i !== 0 && (
                       <div
                         className={`absolute left-[-50%] top-1.5 h-0.5 w-[50%] ${

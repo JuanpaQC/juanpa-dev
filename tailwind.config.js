@@ -20,11 +20,16 @@ export default {
         // 📖 Modo claro tipo libro
         'light-background': '#F5F0E6',
         'light-surface': '#FAF8F4',
-        'light-accent': '#008275',
+        // Era #008275: 4.15:1 sobre el fondo crema, que falla AA en textos de 14 px
+        // (píldoras de filtro, enlaces). Mismo verde, un punto más oscuro -> 5.81:1.
+        'light-accent': '#00695E',
         'light-accent-hover': '#2FA49B',
         'light-text': '#3A3A2D',
         'light-subtle': '#6B665D',
         'light-border': '#DAD2C5',
+        // Borde con contraste suficiente para controles (WCAG 1.4.11 exige 3:1).
+        // 'light-border' se queda para separadores decorativos.
+        'light-border-strong': '#8C8375',
 
         black: '#000000',
       },

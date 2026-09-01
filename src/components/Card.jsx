@@ -17,7 +17,7 @@ export default function Card({ platform, name, username, extra, image, link, ico
         <span className="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
       </div>
 
-      <div className="absolute top-4 right-4 text-xs font-semibold tracking-wide text-dark-subtle dark:text-dark-subtle">
+      <div className="absolute top-4 right-4 text-xs font-semibold tracking-wide text-light-subtle dark:text-dark-subtle">
         {platform}
       </div>
 
@@ -31,8 +31,8 @@ export default function Card({ platform, name, username, extra, image, link, ico
           )}
           <div className="flex flex-col text-center md:text-left">
             <h3 className="text-lg font-bold">{name}</h3>
-            <p className="text-sm text-dark-subtle">{username}</p>
-            {extra && <p className="text-xs text-dark-subtle">{extra}</p>}
+            <p className="text-sm text-light-subtle dark:text-dark-subtle">{username}</p>
+            {extra && <p className="text-xs text-light-subtle dark:text-dark-subtle">{extra}</p>}
           </div>
         </div>
 
@@ -42,7 +42,7 @@ export default function Card({ platform, name, username, extra, image, link, ico
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center bg-light-accent dark:bg-dark-accent text-black py-2 px-6 rounded-xl text-sm font-semibold tracking-wide hover:scale-105 hover:brightness-105 transition-all duration-300 min-w-[140px] text-center"
+            className="inline-flex items-center justify-center bg-light-accent text-white dark:bg-dark-accent dark:text-black py-2 px-6 rounded-xl text-sm font-semibold tracking-wide hover:scale-105 hover:brightness-105 transition-all duration-300 min-w-[140px] text-center"
           >
             {platform === "Gmail"
               ? t("contact.social.mail")

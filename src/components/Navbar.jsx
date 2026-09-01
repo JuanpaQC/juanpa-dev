@@ -46,7 +46,13 @@ export default function Navbar() {
 
         {/* Botón Hamburguesa */}
         <div className="md:hidden">
-          <button onClick={() => setMenuOpen(!menuOpen)} className="text-black dark:text-white">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? t("a11y.closeMenu") : t("a11y.openMenu")}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="text-black dark:text-white"
+          >
             {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
@@ -59,8 +65,8 @@ export default function Navbar() {
               href={`#${id}`}
               className="relative group transition-colors duration-100 ease-in-out"
             >
-              <span className="group-hover:text-dark-accent transition-colors duration-300">{t(`navbar.${id}`)}</span>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-dark-accent transition-all duration-300 group-hover:w-full"></span>
+              <span className="group-hover:text-light-accent dark:text-dark-accent transition-colors duration-300">{t(`navbar.${id}`)}</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-light-accent dark:bg-dark-accent transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
 
@@ -72,16 +78,23 @@ export default function Navbar() {
                 setDarkMode(newMode);
                 localStorage.setItem("theme", newMode ? "dark" : "light");
               }}
-              className={`relative w-12 h-6 rounded-full transition-all duration-500 ease-in-out ${darkMode ? 'bg-dark-accent' : 'bg-gray-300'}`}
+              role="switch"
+              aria-checked={darkMode}
+              aria-label={t("a11y.toggleTheme")}
+              className={`relative w-12 h-6 rounded-full transition-all duration-500 ease-in-out ${darkMode ? 'bg-dark-accent' : 'bg-light-border-strong'}`}
             >
               <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-all duration-500 ease-in-out ${darkMode ? 'translate-x-6' : 'translate-x-0'}`} />
             </button>
             <FaMoon className={`text-blue-300 transition-opacity ${darkMode ? 'opacity-100' : 'opacity-50'}`} />
-            <button onClick={toggleLanguage} className="ml-1 hover:scale-110 transition-transform duration-300">
+            <button
+              onClick={toggleLanguage}
+              aria-label={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
+              className="ml-1 hover:scale-110 transition-transform duration-300"
+            >
               <img
                 src={i18n.language === "es" ? "/flags/us.png" : "/flags/es.png"}
                 alt={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
-                className="w-6 h-6 rounded-full border border-dark-accent shadow-sm"
+                className="w-6 h-6 rounded-full border border-light-accent dark:border-dark-accent shadow-sm"
               />
             </button>
           </li>
@@ -90,7 +103,7 @@ export default function Navbar() {
 
       {/* Menú Móvil */}
       {menuOpen && (
-        <ul className="flex flex-col space-y-4 mt-4 px-4 md:hidden text-black dark:text-white">
+        <ul id="mobile-menu" className="flex flex-col space-y-4 mt-4 px-4 md:hidden text-black dark:text-white">
           {['home', 'about', 'projects', 'contact'].map((id) => (
             <a
               key={id}
@@ -109,16 +122,23 @@ export default function Navbar() {
                 setDarkMode(newMode);
                 localStorage.setItem("theme", newMode ? "dark" : "light");
               }}
-              className={`relative w-12 h-6 rounded-full transition-all duration-500 ease-in-out ${darkMode ? 'bg-dark-accent' : 'bg-gray-300'}`}
+              role="switch"
+              aria-checked={darkMode}
+              aria-label={t("a11y.toggleTheme")}
+              className={`relative w-12 h-6 rounded-full transition-all duration-500 ease-in-out ${darkMode ? 'bg-dark-accent' : 'bg-light-border-strong'}`}
             >
               <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-all duration-500 ease-in-out ${darkMode ? 'translate-x-6' : 'translate-x-0'}`} />
             </button>
             <FaMoon className={`text-blue-300 transition-opacity ${darkMode ? 'opacity-100' : 'opacity-50'}`} />
-            <button onClick={toggleLanguage} className="ml-1 hover:scale-110 transition-transform duration-300">
+            <button
+              onClick={toggleLanguage}
+              aria-label={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
+              className="ml-1 hover:scale-110 transition-transform duration-300"
+            >
               <img
                 src={i18n.language === "es" ? "/flags/us.png" : "/flags/es.png"}
                 alt={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
-                className="w-6 h-6 rounded-full border border-dark-accent shadow-sm"
+                className="w-6 h-6 rounded-full border border-light-accent dark:border-dark-accent shadow-sm"
               />
             </button>
           </li>

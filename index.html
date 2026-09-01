@@ -1,9 +1,25 @@
 <!doctype html>
-<html lang="en">
+<!-- lang se sincroniza en runtime desde src/i18n.js; "es" es el idioma por defecto -->
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/minimal.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Iconos: antes esto era un PNG de 1024x1024 y 980 KB para un icono de 32 px -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Precarga del elemento LCP (el avatar del hero) -->
+    <link
+      rel="preload"
+      as="image"
+      href="/avatar-juanpa-700.webp"
+      imagesrcset="/avatar-juanpa-350.webp 350w, /avatar-juanpa-700.webp 700w"
+      imagesizes="(max-width: 768px) 250px, 350px"
+      fetchpriority="high"
+    />
+
     <!-- Cambia el color según el modo -->
     <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />

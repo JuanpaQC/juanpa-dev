@@ -9,8 +9,7 @@
     "subtitle": "Passionate about creating functional and engaging digital experiences",
     "button": "View Projects"
   },
-  "about": 
-  {
+  "about": {
     "title": "About Me",
     "description": "Hi! I'm Juanpa, a software developer passionate about creating functional, accessible, and personality-filled digital experiences.",
     "bio": "I'm studying Computer Engineering at TEC of Costa Rica and have worked on real and academic projects, both web and mobile. I'm interested in user-centered design, good practices, and learning more every day.",
@@ -32,7 +31,8 @@
         "description": "2021 — Began my journey in Computer Engineering"
       }
     },
-    "button": "Download CV"
+    "button": "Download CV",
+    "photoAlt": "Juanpa Quesada Caballero, Software Engineer, in Costa Rica"
   },
   "projects": {
     "title": "Projects",
@@ -77,5 +77,10 @@
   "messages": {
     "success": "Message sent successfully!",
     "error": "Error sending message. Please try again later."
+  },
+  "a11y": {
+    "toggleTheme": "Switch between light and dark mode",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   }
 }

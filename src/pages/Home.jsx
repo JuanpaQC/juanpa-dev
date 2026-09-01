@@ -1,7 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import avatarImg from "../assets/avatarjuanpa-removebg.png";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -9,10 +8,12 @@ export default function Home() {
 
   useEffect(() => {
     async function animateAvatar() {
+      // El avatar es el elemento LCP. No se anima la opacidad: el navegador no
+      // registra el LCP hasta que el píxel es opaco, y el fundido de 1 s que había
+      // aquí antes se sumaba entero a la métrica.
       await controls.start({
-        opacity: 1,
         y: 0,
-        transition: { duration: 1 },
+        transition: { duration: 0.5, ease: "easeOut" },
       });
 
       controls.start({
@@ -27,7 +28,7 @@ export default function Home() {
     }
 
     animateAvatar();
-  }, []);
+  }, [controls]);
 
   const [typedText, setTypedText] = useState('');
   const [showFinalName, setShowFinalName] = useState(false);
@@ -64,7 +65,7 @@ export default function Home() {
       />
 
       {/* Overlay azul/turquesa translúcido para dark mode */}
-      <div className="absolute inset-0 bg-white/70 dark:bg-[#0D1B2A]/80 backdrop-blur-sm z-10" />
+      <div className="absolute inset-0 bg-white/85 dark:bg-[#0D1B2A]/80 backdrop-blur-sm z-10" />
 
       {/* Texto */}
       <motion.div
@@ -77,13 +78,13 @@ export default function Home() {
           <motion.pre
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="text-2xl md:text-4xl font-mono text-left whitespace-pre-wrap leading-tight text-white"
+            className="text-2xl md:text-4xl font-mono text-left whitespace-pre-wrap leading-tight text-light-text dark:text-white"
           >
             <code>
-              <span className="text-[#00C9B7]">&lt;strong&gt;</span>
-              <span className="text-white">{typedText}</span>
-              <span className="text-[#00C9B7]">&lt;/strong&gt;</span>
-              <span className="inline-block w-[1ch] bg-white animate-blink ml-1" />
+              <span className="text-light-accent dark:text-[#00C9B7]">&lt;strong&gt;</span>
+              <span className="text-light-text dark:text-white">{typedText}</span>
+              <span className="text-light-accent dark:text-[#00C9B7]">&lt;/strong&gt;</span>
+              <span className="inline-block w-[1ch] bg-light-text dark:bg-white animate-blink ml-1" />
             </code>
           </motion.pre>
         ) : (
@@ -91,13 +92,13 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight font-orbitron text-accent"
+            className="text-4xl md:text-6xl font-bold tracking-tight font-orbiton text-light-accent dark:text-dark-accent"
           >
             Juanpa Quesada Caballero
           </motion.h1>
         )}
 
-        <p className="text-lg md:text-xl text-dark-subtle">
+        <p className="text-lg md:text-xl text-light-subtle dark:text-dark-subtle">
           {t("home.subtitle")}
         </p>
 
@@ -105,7 +106,7 @@ export default function Home() {
           href="#projects"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-block bg-dark-accent text-black px-6 py-3 rounded-lg font-semibold text-lg transition"
+          className="inline-block bg-light-accent text-white dark:bg-dark-accent dark:text-black px-6 py-3 rounded-lg font-semibold text-lg transition"
         >
           {t("home.button")}
         </motion.a>
@@ -115,11 +116,17 @@ export default function Home() {
       <div className="relative z-10 md:w-1/2 flex justify-center items-center mt-[-20px] md:mt-0">
         <div className="absolute w-[300px] h-[300px] bg-[#00F6ED] rounded-full blur-3xl opacity-30 z-0" />
         <motion.img
-          src={avatarImg}
-          alt="Juanpa avatar"
-          initial={{ opacity: 0, y: 30 }}
+          src="/avatar-juanpa-700.webp"
+          srcSet="/avatar-juanpa-350.webp 350w, /avatar-juanpa-700.webp 700w"
+          sizes="(max-width: 768px) 250px, 350px"
+          alt="Juanpa Quesada Caballero"
+          width="350"
+          height="350"
+          fetchPriority="high"
+          decoding="async"
+          initial={{ y: 30 }}
           animate={controls}
-          className="relative z-10 max-w-[250px] md:max-w-[300px] lg:max-w-[350px] drop-shadow-[0_0_12px_#00F6ED80]"
+          className="relative z-10 w-full max-w-[250px] md:max-w-[300px] lg:max-w-[350px] h-auto drop-shadow-[0_0_12px_#00F6ED80]"
         />
       </div>
     </section>

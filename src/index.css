@@ -12,6 +12,28 @@
   body {
     overflow-x: hidden;
   }
+
+  /* Red de seguridad de foco: ningún elemento interactivo debe quedar sin
+     indicador visible al navegar con teclado (WCAG 2.4.7). */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid theme('colors.light-accent');
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .dark a:focus-visible,
+  .dark button:focus-visible,
+  .dark input:focus-visible,
+  .dark textarea:focus-visible,
+  .dark select:focus-visible,
+  .dark [tabindex]:focus-visible {
+    outline-color: theme('colors.dark-accent');
+  }
 }
 
 @layer utilities {

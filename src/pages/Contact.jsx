@@ -59,7 +59,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-3xl md:text-4xl font-bold mb-16 text-center text-dark-accent"
+        className="text-3xl md:text-4xl font-bold mb-16 text-center text-light-accent dark:text-dark-accent"
       >
         {t("contact.title")}
       </motion.h2>
@@ -90,7 +90,7 @@ export default function Contact() {
                   value={formData[field]}
                   onChange={handleChange}
                   required
-                  className="px-5 py-3 rounded-xl border dark:border-dark-border bg-white dark:bg-dark-background text-black dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-dark-accent transition"
+                  className="px-5 py-3 rounded-xl border border-light-border-strong dark:border-dark-border bg-white dark:bg-dark-background text-black dark:text-dark-text outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent transition"
                 />
               ) : (
                 <textarea
@@ -100,7 +100,7 @@ export default function Contact() {
                   value={formData[field]}
                   onChange={handleChange}
                   required
-                  className="px-5 py-3 rounded-xl border dark:border-dark-border bg-white dark:bg-dark-background text-black dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-dark-accent transition"
+                  className="px-5 py-3 rounded-xl border border-light-border-strong dark:border-dark-border bg-white dark:bg-dark-background text-black dark:text-dark-text outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent transition"
                 ></textarea>
               )}
             </div>
@@ -110,7 +110,7 @@ export default function Contact() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="w-full bg-dark-accent text-black py-4 rounded-xl font-bold text-lg tracking-wider transition"
+            className="w-full bg-light-accent text-white dark:bg-dark-accent dark:text-black py-4 rounded-xl font-bold text-lg tracking-wider transition"
           >
             {t("contact.form.button")}
           </motion.button>
@@ -161,7 +161,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mt-20 text-center text-xs text-dark-subtle"
+        className="mt-20 text-center text-xs text-light-subtle dark:text-dark-subtle"
       >
         {t("contact.footer")}
       </motion.div>
