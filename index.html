@@ -1,15 +1,39 @@
 <!doctype html>
-<!-- lang se sincroniza en runtime desde src/i18n.js; "es" es el idioma por defecto -->
+<!--
+  Al migrar a juanpaqc.dev, la URL base aparece en:
+    · <link rel="canonical">
+    · og:url  ·  og:image  ·  twitter:image
+    · el bloque JSON-LD de abajo
+    · public/robots.txt  y  public/sitemap.xml
+  Busca y reemplaza "https://juanpaqc.netlify.app" en esos seis sitios y
+  deja un redirect 301 del subdominio antiguo al nuevo.
+
+  lang se sincroniza en runtime desde src/i18n.js; "es" es el idioma por defecto.
+-->
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Iconos: antes esto era un PNG de 1024x1024 y 980 KB para un icono de 32 px -->
+    <!-- ============ IDENTIDAD ============ -->
+    <title>Juanpa Quesada Caballero — Software Engineer React Native</title>
+    <meta
+      name="description"
+      content="Software Engineer en Costa Rica. Apps web con React y móviles con React Native, Expo y Firebase. Portafolio, proyectos y CV de Juanpa Quesada Caballero."
+    />
+    <meta name="author" content="Juanpa Quesada Caballero" />
+    <link rel="canonical" href="https://juanpaqc.netlify.app/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+    <!-- ============ ICONOS ============ -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- ============ RENDIMIENTO ============ -->
+    <!-- El hero todavía trae su fondo de Unsplash; sin preconnect costaba ~1,2 s en frío -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://api.github.com" crossorigin />
     <!-- Precarga del elemento LCP (el avatar del hero) -->
     <link
       rel="preload"
@@ -20,16 +44,132 @@
       fetchpriority="high"
     />
 
-    <!-- Cambia el color según el modo -->
     <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
 
-    <meta name="description" content="Portfolio profesional de Juanpa Quesada – Software Engineer especializado en apps modernas y diseño minimalista." />
-    <meta name="author" content="Juanpa Quesada Caballero" />
-    <title>Juanpa.dev</title>
+    <!-- ============ OPEN GRAPH (LinkedIn, WhatsApp, Slack, Discord, Telegram) ============ -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Juanpa Quesada" />
+    <meta property="og:locale" content="es_CR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:url" content="https://juanpaqc.netlify.app/" />
+    <meta property="og:title" content="Juanpa Quesada Caballero — Software Engineer React &amp; React Native" />
+    <meta
+      property="og:description"
+      content="Software Engineer en Costa Rica. Aplicaciones web con React y móviles con React Native, Expo y Firebase. Mira mis proyectos y descarga mi CV."
+    />
+    <meta property="og:image" content="https://juanpaqc.netlify.app/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Juanpa Quesada Caballero, Software Engineer — React, React Native, Expo, Firebase, Costa Rica" />
+    <meta property="profile:first_name" content="Juanpa" />
+    <meta property="profile:last_name" content="Quesada Caballero" />
+    <meta property="profile:username" content="JuanpaQC" />
+
+    <!-- ============ TWITTER / X ============ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Juanpa Quesada Caballero — Software Engineer React &amp; React Native" />
+    <meta
+      name="twitter:description"
+      content="Software Engineer en Costa Rica. Aplicaciones web con React y móviles con React Native, Expo y Firebase."
+    />
+    <meta name="twitter:image" content="https://juanpaqc.netlify.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Juanpa Quesada Caballero, Software Engineer — juanpaqc" />
+
+    <!-- ============ DATOS ESTRUCTURADOS ============ -->
+    <!-- Un solo @graph para que Google vea una entidad, no tres perfiles sueltos.
+         Los proyectos se añadirán como ItemList cuando tengan repo o demo pública:
+         datos estructurados que apuntan a URLs inexistentes son peores que ninguno. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://juanpaqc.netlify.app/#juanpa",
+            "name": "Juanpa Quesada Caballero",
+            "givenName": "Juanpa",
+            "familyName": "Quesada Caballero",
+            "alternateName": "JuanpaQC",
+            "url": "https://juanpaqc.netlify.app/",
+            "image": "https://juanpaqc.netlify.app/og-image.png",
+            "email": "mailto:jpqcaballero@gmail.com",
+            "jobTitle": "Software Engineer",
+            "description": "Software Engineer costarricense especializado en desarrollo web con React y desarrollo móvil con React Native, Expo y Firebase.",
+            "nationality": { "@type": "Country", "name": "Costa Rica" },
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "CR"
+            },
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Instituto Tecnológico de Costa Rica",
+              "alternateName": "TEC",
+              "url": "https://www.tec.ac.cr/"
+            },
+            "knowsLanguage": [
+              { "@type": "Language", "name": "Spanish", "alternateName": "es" },
+              { "@type": "Language", "name": "English", "alternateName": "en" }
+            ],
+            "knowsAbout": [
+              "React",
+              "React Native",
+              "JavaScript",
+              "Expo",
+              "Firebase",
+              "Tailwind CSS",
+              "Vite",
+              "Desarrollo web",
+              "Desarrollo móvil",
+              "Desarrollo asistido por agentes de IA"
+            ],
+            "sameAs": [
+              "https://github.com/JuanpaQC",
+              "https://www.linkedin.com/in/juanpaquesadacaballero"
+            ]
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://juanpaqc.netlify.app/#profilepage",
+            "url": "https://juanpaqc.netlify.app/",
+            "name": "Juanpa Quesada Caballero — Software Engineer React & React Native",
+            "inLanguage": "es",
+            "mainEntity": { "@id": "https://juanpaqc.netlify.app/#juanpa" },
+            "about": { "@id": "https://juanpaqc.netlify.app/#juanpa" },
+            "isPartOf": { "@id": "https://juanpaqc.netlify.app/#website" }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://juanpaqc.netlify.app/#website",
+            "url": "https://juanpaqc.netlify.app/",
+            "name": "Juanpa Quesada",
+            "inLanguage": "es",
+            "publisher": { "@id": "https://juanpaqc.netlify.app/#juanpa" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Respaldo para rastreadores que no ejecutan JavaScript (LinkedIn, WhatsApp,
+         Bing). El sitio es una SPA: sin esto ven un <div> vacío. -->
+    <noscript>
+      <h1>Juanpa Quesada Caballero — Software Engineer</h1>
+      <p>
+        Software Engineer en Costa Rica, especializado en React, React Native, Expo y Firebase.
+        Estudiante de Ingeniería en Computación en el TEC.
+      </p>
+      <p>
+        Este sitio necesita JavaScript para su versión interactiva. Perfiles:
+        <a href="https://github.com/JuanpaQC">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/juanpaquesadacaballero/">LinkedIn</a> ·
+        <a href="mailto:jpqcaballero@gmail.com">jpqcaballero@gmail.com</a>
+      </p>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

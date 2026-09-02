@@ -1,0 +1,17 @@
+# https://juanpaqc.netlify.app/robots.txt
+
+User-agent: *
+Allow: /
+
+# Rastreadores de modelos de lenguaje. Para un portafolio conviene ser citado,
+# así que se permiten explícitamente.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://juanpaqc.netlify.app/sitemap.xml
