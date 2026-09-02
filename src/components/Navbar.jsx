@@ -1,5 +1,5 @@
-import { useContext, useState, useEffect } from "react";
-import { ThemeContext } from "../context/ThemeContext";
+import { useContext, useState, useEffect, useRef } from "react";
+import { ThemeContext } from "../context/theme-context";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
@@ -9,23 +9,24 @@ export default function Navbar() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
   const { t, i18n } = useTranslation();
   const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [langChangedMsg, setLangChangedMsg] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // La posición anterior va en una ref, no en estado: como estado obligaba a
+  // re-registrar el listener de scroll en cada evento y provocaba un render
+  // por frame mientras se hacía scroll.
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
-      setLastScrollY(currentScrollY);
+      const bajando = currentScrollY > lastScrollY.current;
+      setShowNavbar(!(bajando && currentScrollY > 80));
+      lastScrollY.current = currentScrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "es" ? "en" : "es";
@@ -36,9 +37,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 transform -translate-x-1/2 w-[98%] md:w-[90%] lg:w-[80%] px-6 py-4 z-50 rounded-2xl shadow-xl transition-all duration-100 ease-in-out
+      className={`fixed top-4 left-1/2 transform -translate-x-1/2 w-[98%] md:w-[90%] lg:w-[80%] px-6 py-4 z-50 rounded-2xl shadow-xl transition-transform duration-300 ease-in-out
         text-light-text dark:text-dark-text border border-light-border dark:border-dark-border
-        backdrop-blur-md bg-light-surface/80 dark:bg-dark-background/80`}
+        backdrop-blur-md bg-light-surface/80 dark:bg-dark-background/80
+        motion-reduce:transition-none
+        ${showNavbar || menuOpen ? "translate-y-0" : "-translate-y-[150%]"}`}
       style={{ boxShadow: '0 0 20px rgba(0, 246, 237, 0.1)' }}
     >
       <div className="container mx-auto flex justify-between items-center">

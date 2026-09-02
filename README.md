@@ -1,5 +1,7 @@
 # juanpa.dev
 
+[![CI](https://github.com/JuanpaQC/juanpa-dev/actions/workflows/ci.yml/badge.svg)](https://github.com/JuanpaQC/juanpa-dev/actions/workflows/ci.yml)
+
 Portafolio personal de **Juanpa Quesada Caballero** — Software Engineer, Costa Rica.
 Estudiante de Ingeniería en Computación en el TEC.
 
@@ -23,7 +25,28 @@ npm install
 npm run dev
 ```
 
-Otros comandos: `npm run build` (producción), `npm run preview` (servir el build), `npm run lint`.
+| Comando | Para qué |
+|---|---|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm run preview` | Sirve el build |
+| `npm run lint` | ESLint |
+| `npm test` | Vitest |
+
+## Cómo está documentado
+
+Este repositorio se desarrolla con agentes de codificación, y el contexto que
+necesitan está versionado junto al código:
+
+| Fichero | Qué contiene |
+|---|---|
+| [`AGENTS.md`](AGENTS.md) | Contexto del proyecto en el formato abierto [agents.md](https://agents.md): comandos, estructura, convenciones y los **invariantes** que no se pueden romper |
+| [`CLAUDE.md`](CLAUDE.md) | Cómo trabajar aquí concretamente con Claude Code |
+| [`docs/adr/`](docs/adr/) | Decisiones de arquitectura: qué se decidió, con qué datos y qué se descartó |
+| [`docs/specs/`](docs/specs/) | Especificaciones escritas **antes** de implementar |
+
+Los invariantes de `AGENTS.md` no son estilo: cada uno corrigió un defecto real y
+medido, y está para que no vuelva.
 
 ## Estructura
 
@@ -31,9 +54,10 @@ Otros comandos: `npm run build` (producción), `npm run preview` (servir el buil
 src/
 ├── pages/        Home · About · Projects · Contact
 ├── components/   Navbar · ProjectsWithFilter · Card · TechCarousel · LanguageToast
-├── context/      ThemeContext (modo claro/oscuro)
+├── context/      theme-context.js (contexto) · ThemeContext.jsx (provider)
 ├── locales/      es · en
 ├── assets/opt/   derivados de imagen optimizados (WebP)
+├── test/         configuración de Vitest
 └── i18n.js
 ```
 
@@ -53,6 +77,14 @@ rendimiento, accesibilidad y SEO. Completado hasta ahora:
 - **Modo claro accesible.** 11 de 11 comprobaciones de contraste pasan WCAG 2.2 AA.
 - **Foco visible**, nombres accesibles en todos los controles y atributo `lang`
   sincronizado con el idioma de la interfaz.
+- **Indexable y compartible.** `<head>` completo, Open Graph, Twitter Card,
+  JSON-LD (`Person` + `ProfilePage` + `WebSite`), `robots.txt`, `sitemap.xml` y un
+  `<noscript>` de respaldo para los rastreadores que no ejecutan JavaScript.
+- **El stack se nombra en texto**, no solo con iconos: la palabra "React" pasó de
+  aparecer 0 veces a 7.
+- **CI en verde**: lint, tests y build en cada push, más un límite de peso del
+  build que falla si vuelve a colarse una imagen sin optimizar.
 
-Pendiente: casos de estudio de proyectos, metadatos de compartición y datos
-estructurados, `prefers-reduced-motion`, prerender estático y tests.
+Pendiente: casos de estudio de proyectos, la sección sobre el flujo con agentes
+(especificada en `docs/specs/0001`), `prefers-reduced-motion`, prerender estático
+y las tipografías, que están declaradas pero nunca llegan a cargarse.

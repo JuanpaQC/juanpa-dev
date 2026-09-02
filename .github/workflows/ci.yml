@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancela ejecuciones anteriores de la misma rama: solo interesa la última.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Lint, tests y build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Comprobar el peso del build
+        # La auditoría dejó el build en ~728 KB desde los 9.3 MB originales.
+        # Este paso falla si alguien vuelve a subir una imagen sin optimizar.
+        run: |
+          PESO=$(du -sk dist | cut -f1)
+          echo "Peso de dist/: ${PESO} KB"
+          if [ "$PESO" -gt 2048 ]; then
+            echo "::error::El build pesa ${PESO} KB y el límite son 2048 KB."
+            echo "Suele ser una imagen sin redimensionar. Mira src/assets/opt/ para el patrón a seguir."
+            exit 1
+          fi
