@@ -74,29 +74,42 @@ export default function Home() {
         transition={{ duration: 1 }}
         className="z-10 md:w-[48%] lg:ml-20 text-left space-y-6"
       >
-        {!showFinalName ? (
-          <motion.pre
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="text-2xl md:text-4xl font-mono text-left whitespace-pre-wrap leading-tight text-light-text dark:text-white"
-          >
-            <code>
-              <span className="text-light-accent dark:text-[#00C9B7]">&lt;strong&gt;</span>
-              <span className="text-light-text dark:text-white">{typedText}</span>
-              <span className="text-light-accent dark:text-[#00C9B7]">&lt;/strong&gt;</span>
-              <span className="inline-block w-[1ch] bg-light-text dark:bg-white animate-blink ml-1" />
-            </code>
-          </motion.pre>
-        ) : (
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight font-orbiton text-light-accent dark:text-dark-accent"
-          >
-            Juanpa Quesada Caballero
-          </motion.h1>
-        )}
+        {/* El <h1> existe desde el primer frame. Antes solo aparecía al terminar
+            la animación, a los ~3,7 s: hasta entonces la página no tenía
+            encabezado principal ni para Google ni para un lector de pantalla,
+            y el tecleo leía en voz alta los caracteres "<strong>".
+            El efecto es decoración, así que va marcado como aria-hidden. */}
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+          {!showFinalName ? (
+            <>
+              {/* Mientras teclea, el nombre real vive aquí para el lector de
+                  pantalla y el rastreador; el efecto queda como decoración. */}
+              <span className="sr-only">Juanpa Quesada Caballero</span>
+              <motion.span
+                aria-hidden="true"
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="block text-2xl md:text-4xl font-mono font-normal text-left whitespace-pre-wrap leading-tight text-light-text dark:text-white"
+              >
+                <code>
+                  <span className="text-light-accent dark:text-[#00C9B7]">&lt;strong&gt;</span>
+                  <span className="text-light-text dark:text-white">{typedText}</span>
+                  <span className="text-light-accent dark:text-[#00C9B7]">&lt;/strong&gt;</span>
+                  <span className="inline-block w-[1ch] bg-light-text dark:bg-white animate-blink ml-1" />
+                </code>
+              </motion.span>
+            </>
+          ) : (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="block font-orbiton text-light-accent dark:text-dark-accent"
+            >
+              Juanpa Quesada Caballero
+            </motion.span>
+          )}
+        </h1>
 
         <p className="text-lg md:text-xl text-light-subtle dark:text-dark-subtle">
           {t("home.subtitle")}
