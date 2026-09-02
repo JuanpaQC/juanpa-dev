@@ -44,8 +44,11 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         {/* El logotipo no es el encabezado de la página: era un segundo <h1> que
             competía con el del hero. Ahora es un enlace al inicio. */}
-        <a href="#home" className="text-2xl md:text-4xl tracking-tight">
-          Juanpa.dev
+        <a
+          href="#home"
+          className="text-2xl lg:text-4xl tracking-tight whitespace-nowrap"
+        >
+          Juanpa Quesada
         </a>
 
         {/* Botón Hamburguesa */}
