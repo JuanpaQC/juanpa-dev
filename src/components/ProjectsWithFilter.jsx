@@ -41,12 +41,16 @@ export default function ProjectsWithFilter() {
     { key: "mobile", label: t("projects.type.mobile") },
   ];
 
+  // `link: null` oculta el botón "Ver Proyecto" de la tarjeta.
+  // Los tres apuntaban a marcadores de posición de plantilla
+  // (github.com/tuusuario/..., tusitioweb.netlify.app) que devolvían 404.
+  // Para publicar uno: sustituir null por la URL real del repo o de la demo.
   const allProjects = [
     {
       title: t("projects.titles.project1"),
       description: t("projects.descriptions.project1"),
       tech: ["React Native", "Firebase", "Expo"],
-      link: "https://github.com/tuusuario/campo-app",
+      link: null, // TODO: repo/demo de Campo App
       type: "mobile",
       statusIndex: 2,
     },
@@ -54,7 +58,7 @@ export default function ProjectsWithFilter() {
       title: t("projects.titles.project2"),
       description: t("projects.descriptions.project2"),
       tech: ["React", "Tailwind", "Netlify"],
-      link: "https://tusitioweb.netlify.app",
+      link: null, // TODO: URL del sitio del cliente
       type: "desktop",
       statusIndex: 1,
     },
@@ -62,7 +66,7 @@ export default function ProjectsWithFilter() {
       title: t("projects.titles.project3"),
       description: t("projects.descriptions.project3"),
       tech: ["React", "Framer Motion", "Tailwind"],
-      link: "https://github.com/tuusuario/portfolio-animado",
+      link: null, // TODO: repo/demo del portfolio animado
       type: "personal",
       statusIndex: 0,
     },
