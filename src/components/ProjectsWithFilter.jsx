@@ -145,14 +145,22 @@ export default function ProjectsWithFilter() {
               <h3 className="text-xl font-semibold text-light-text dark:text-white">{project.title}</h3>
               <p className="text-sm text-light-subtle dark:text-dark-subtle">{project.description}</p>
 
-              {/* Tecnologías usadas */}
-              <div className="flex flex-wrap gap-3 mt-2">
-                {project.tech.map((tech, i) => (
-                  <div key={i} title={tech} className="hover:scale-110 transition-transform">
-                    {techIcons[tech] || <span className="text-xs text-gray-400">{tech}</span>}
-                  </div>
+              {/* Tecnologías usadas. El nombre va en texto junto al icono, no solo
+                  como atributo title: un SVG no es contenido indexable, así que
+                  antes la palabra "React" no aparecía ni una vez en todo el sitio. */}
+              <ul className="flex flex-wrap gap-2 mt-2">
+                {project.tech.map((tech) => (
+                  <li
+                    key={tech}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-light-border dark:border-gray-700 bg-light-background/60 dark:bg-white/5 px-2.5 py-1 text-xs font-medium text-light-text dark:text-dark-text"
+                  >
+                    <span aria-hidden="true" className="[&>svg]:text-base [&>svg]:block">
+                      {techIcons[tech]}
+                    </span>
+                    {tech}
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               {/* Botón de ver proyecto */}
               {project.link && (
