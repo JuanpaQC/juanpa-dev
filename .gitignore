@@ -35,3 +35,7 @@ dist-ssr
 # Lo que se sirve son los derivados de src/assets/opt/ y /public.
 src/assets/*.jpg
 src/assets/*.jpeg
+
+# Skills de plugins instaladas por Claude Code. Son caché de herramientas,
+# no código del proyecto: no deben acabar en el repo.
+.claude/skills/
