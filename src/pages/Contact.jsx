@@ -58,6 +58,7 @@ export default function Contact() {
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.5 }}
         className="font-display text-2xl md:text-[1.75rem] font-bold tracking-[-0.022em] mb-16 text-center text-light-text dark:text-dark-text"
       >
@@ -70,6 +71,7 @@ export default function Contact() {
           onSubmit={handleSubmit}
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5 }}
           className="w-full md:w-1/2 space-y-8"
         >
@@ -120,6 +122,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5 }}
           className="w-full md:w-1/2 flex flex-col"
         >
@@ -160,6 +163,7 @@ export default function Contact() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.5 }}
         className="mt-20 text-center text-xs text-light-subtle dark:text-dark-subtle"
       >

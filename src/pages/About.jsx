@@ -20,6 +20,7 @@ export default function About() {
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.6 }}
         className="font-display text-2xl md:text-[1.75rem] font-bold tracking-[-0.022em] text-center w-full mb-10 text-light-text dark:text-dark-text"
       >
@@ -32,7 +33,8 @@ export default function About() {
         {/* Imagen */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 35 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.6 }}
           className="w-full md:w-1/3 flex justify-center md:justify-start"
         >
@@ -68,6 +70,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="md:w-2/3 space-y-6"
         >
@@ -94,6 +97,7 @@ export default function About() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.6, delay: 0.4 }}
         className="flex flex-wrap gap-4 mt-12"
       >
@@ -104,6 +108,7 @@ export default function About() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.6, delay: 0.6 }}
         className="mt-6 grid md:grid-cols-2 gap-10 items-start w-full"
       >
@@ -150,6 +155,7 @@ export default function About() {
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           className="bg-light-accent text-white dark:bg-dark-accent dark:text-black px-6 py-3 rounded-lg font-semibold text-lg transition"
         >

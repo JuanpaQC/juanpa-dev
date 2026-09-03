@@ -45,4 +45,32 @@
   .animate-blink {
     animation: blink 1s step-start infinite;
   }
+
+  /* Marquesina del carrusel de tecnologías. La pista se duplica en el JSX, así
+     que desplazar exactamente -50% deja el segundo juego donde estaba el
+     primero: el bucle es continuo y no da el salto que daba el -1000px fijo. */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+
+  /* Contenido en movimiento que arranca solo, dura más de 5 s y convive con
+     otro contenido: WCAG 2.2.2 (nivel A) exige poder detenerlo. Para quien
+     haya pedido menos movimiento, se detiene todo lo que se repite. */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blink { animation: none; opacity: 1; }
+    .animate-marquee { animation: none; }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

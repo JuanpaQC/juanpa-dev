@@ -1,16 +1,22 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const { t } = useTranslation();
   const controls = useAnimation();
+  const menosMovimiento = useReducedMotion();
 
   useEffect(() => {
     async function animateAvatar() {
       // El avatar es el elemento LCP. No se anima la opacidad: el navegador no
       // registra el LCP hasta que el píxel es opaco, y el fundido de 1 s que había
       // aquí antes se sumaba entero a la métrica.
+      if (menosMovimiento) {
+        controls.set({ y: 0 });
+        return;
+      }
+
       await controls.start({
         y: 0,
         transition: { duration: 0.5, ease: "easeOut" },
@@ -28,13 +34,21 @@ export default function Home() {
     }
 
     animateAvatar();
-  }, [controls]);
+  }, [controls, menosMovimiento]);
 
   const [typedText, setTypedText] = useState('');
   const [showFinalName, setShowFinalName] = useState(false);
   const fullCode = 'Juanpa Quesada Caballero';
 
   useEffect(() => {
+    // Con menos movimiento pedido, se salta el tecleo entero: eran 3,4 s de
+    // texto moviéndose en la primera pantalla.
+    if (menosMovimiento) {
+      setTypedText(fullCode);
+      setShowFinalName(true);
+      return;
+    }
+
     let index = 0;
     const interval = setInterval(() => {
       setTypedText(fullCode.substring(0, index));
@@ -48,7 +62,7 @@ export default function Home() {
       }
     }, 100);
     return () => clearInterval(interval);
-  }, []);
+  }, [menosMovimiento]);
 
   return (
     <section
