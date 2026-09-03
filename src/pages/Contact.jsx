@@ -9,6 +9,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [githubProfile, setGithubProfile] = useState(null);
   const [toast, setToast] = useState({ show: false, type: "", text: "" });
+  const [enviando, setEnviando] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setEnviando(true);
     try {
       const res = await fetch("https://contact-backend-h7l4.onrender.com/send-email", {
         method: "POST",
@@ -40,8 +42,10 @@ export default function Contact() {
       }
     } catch (error) {
       console.error(error);
-      setToast({ show: true, type: "error", text: "Hubo un error de conexión con el servidor." });
+      setToast({ show: true, type: "error", text: t("messages.network") });
     }
+
+    setEnviando(false);
 
     if (navigator.vibrate) {
       navigator.vibrate(200);
@@ -112,9 +116,11 @@ export default function Contact() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="w-full bg-light-accent text-white dark:bg-dark-accent dark:text-black py-4 rounded-xl font-bold text-lg tracking-wider transition"
+            disabled={enviando}
+            aria-busy={enviando}
+            className="w-full bg-light-accent text-white dark:bg-dark-accent dark:text-black py-4 rounded-xl font-bold text-lg tracking-wider transition disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {t("contact.form.button")}
+            {enviando ? t("contact.form.sending") : t("contact.form.button")}
           </motion.button>
         </motion.form>
 
@@ -134,24 +140,23 @@ export default function Contact() {
             {githubProfile && (
               <Card
                 platform="GitHub"
-                name={githubProfile.name}
-                username={`@${githubProfile.login}`}
-                extra={`${githubProfile.public_repos} Repositorios`}
+                name={`@${githubProfile.login}`}
+                username={t("contact.social.repos", { n: githubProfile.public_repos })}
                 image={githubProfile.avatar_url}
                 link={githubProfile.html_url}
               />
             )}
             <Card
               platform="LinkedIn"
-              name="Juanpa Quesada"
-              username="Ingeniero de Software"
+              name="in/juanpaquesadacaballero"
+              username={t("contact.social.linkedinTag")}
               icon={<FaLinkedin className="text-blue-600 text-5xl" />}
               link="https://www.linkedin.com/in/juanpaquesadacaballero/"
             />
             <Card
               platform="Gmail"
-              name="Juanpa Quesada"
-              username="jpqcaballero@gmail.com"
+              name="jpqcaballero@gmail.com"
+              username={t("contact.social.mailTag")}
               icon={<SiGmail className="text-red-500 text-5xl" />}
               link="mailto:jpqcaballero@gmail.com"
             />
@@ -167,7 +172,7 @@ export default function Contact() {
         transition={{ duration: 0.5 }}
         className="mt-20 text-center text-xs text-light-subtle dark:text-dark-subtle"
       >
-        {t("contact.footer")}
+        {t("contact.footer", { year: new Date().getFullYear() })}
       </motion.div>
 
       {/* Toast message */}

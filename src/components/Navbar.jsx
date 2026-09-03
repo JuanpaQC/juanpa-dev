@@ -49,9 +49,10 @@ export default function Navbar() {
             competía con el del hero. Ahora es un enlace al inicio. */}
         <a
           href="#home"
-          className="font-display text-2xl lg:text-3xl tracking-[-0.02em] whitespace-nowrap"
+          aria-label={t("a11y.homeLink")}
+          className="font-mono text-xl lg:text-2xl tracking-[-0.01em] whitespace-nowrap"
         >
-          Juanpa Quesada
+          <span aria-hidden="true" className="text-light-subtle dark:text-dark-subtle">~/</span>juanpaqc
         </a>
 
         {/* Botón Hamburguesa */}

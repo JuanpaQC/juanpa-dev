@@ -6,41 +6,42 @@
     "contact": "Contacto"
   },
   "home": {
-    "subtitle": "Apasionado por crear experiencias digitales funcionales y atractivas",
+    "subtitle": "Desarrollo apps móviles con React Native, Expo y Firebase, trabajando con agentes de IA: escribo la especificación, reviso el diff y respondo por el resultado.",
     "button": "Ver proyectos"
   },
   "about": {
     "title": "Sobre mí",
-    "description": "¡Hola! Soy Juanpa, desarrollador de software apasionado por crear experiencias digitales funcionales, accesibles y con personalidad.",
-    "bio": "Estudio Ingeniería en Computación en el TEC de Costa Rica y he trabajado en proyectos reales y académicos, tanto en web como en móvil. Me interesa el diseño centrado en el usuario, las buenas prácticas y seguir aprendiendo cada día.",
-    "location": "Costa Rica",
-    "rol": "Software Engineer",
-    "major": "Ingeniería en Computación",
-    "languages": "Español, Inglés",
+    "description": "Soy Juanpa. Llevo dos años construyendo apps móviles con React Native, Expo y Firebase, de la idea a la tienda.",
+    "bio": "Estudio Ingeniería en Computación en el TEC de Costa Rica y me quedan dos años. Busco una pasantía compatible con las clases, en un equipo que ya tenga código en producción.",
+    "labels": {
+      "location": "Ubicación",
+      "major": "Carrera",
+      "focus": "Enfoque",
+      "languages": "Idiomas"
+    },
+    "location": "Costa Rica · UTC−6",
+    "major": "Ingeniería en Computación, TEC",
+    "rol": "Desarrollo móvil con React Native",
+    "languages": "Español nativo, inglés profesional",
     "references": "Referencias",
     "referencesDescription#1": "\"Trabajar con Juanpa fue una experiencia excelente. Siempre propone soluciones creativas y sabe escuchar.\"",
     "referencesDescription#2": "\"Juanpa es responsable, ordenado y tiene una gran capacidad para resolver problemas técnicos con calma.\"",
     "timeline": {
-      "2024": {
-        "description": "2024 - Inicié proyectos freelance y portafolio profesional"
-      },
-      "2023": {
-        "description": "2023 - Publiqué mi primera app móvil con Expo + Firebase"
-      },
-      "2021": {
-        "description": "2021 — Empecé mi carrera en Ingeniería en Computación"
-      }
+      "2021": "Entré a Ingeniería en Computación en el TEC.",
+      "2023": "Publiqué mi primera app móvil con Expo y Firebase.",
+      "2024": "Primer cliente freelance: un sitio real, con plazo y con alguien esperándolo.",
+      "2025": "Empecé a construir con agentes de IA: specs, AGENTS.md y revisión de cada diff."
     },
     "button": "Descargar CV",
-    "photoAlt": "Juanpa Quesada Caballero, Software Engineer, en Costa Rica"
+    "photoAlt": "Juanpa Quesada Caballero, desarrollador móvil en Costa Rica"
   },
   "projects": {
     "title": "Proyectos",
     "type": {
       "all": "Todos",
       "personal": "Personal",
-      "desktop": "Freelance",
-      "mobile": "Trabajo"
+      "freelance": "Freelance",
+      "work": "Trabajo"
     },
     "titles": {
       "project1": "Campo App",
@@ -48,39 +49,48 @@
       "project3": "Portfolio Animado"
     },
     "descriptions": {
-      "project1": "App móvil para clasificar terrenos agrícolas según criterios técnicos nacionales.",
-      "project2": "Landing page profesional para empresa de instalación de internet.",
-      "project3": "Diseño experimental de portafolio con animaciones personalizadas."
+      "project1": "Clasificar un terreno agrícola exigía cruzar a mano los criterios técnicos nacionales. La app lo hace en el campo.",
+      "project2": "Una empresa de instalación de internet solo tenía WhatsApp como escaparate. Le construí un sitio que capta solicitudes.",
+      "project3": "Este sitio. Banco de pruebas de rendimiento, accesibilidad y de mi flujo con agentes."
     },
-    "button": "Ver Proyecto ↗",
-    "status": {
-      "desing": "En progreso",
-      "development": "Completado",
-      "published": "Publicado"
+    "button": "Ver proyecto ↗",
+    "stages": {
+      "design": "Diseño",
+      "development": "Desarrollo",
+      "production": "Producción"
     }
   },
   "contact": {
-    "title": "¡Contactame!",
+    "title": "Hablemos",
+    "lead": "¿Buscas un pasante para tu equipo móvil? Te respondo en menos de 24 horas.",
     "form": {
       "name": "Nombre",
       "email": "Correo electrónico",
       "message": "Mensaje",
-      "button": "Enviar Mensaje"
+      "messagePlaceholder": "Cuéntame qué necesitas y en qué plazo.",
+      "button": "Enviar mensaje",
+      "sending": "Enviando…"
     },
     "social": {
-      "title": "Mis Redes:",
+      "title": "Encuéntrame en",
       "button": "Ver perfil →",
-      "mail": "Enviar correo →"
+      "mail": "Escribirme →",
+      "repos": "{{n}} repositorios públicos",
+      "linkedinTag": "Perfil profesional",
+      "mailTag": "Respondo en menos de 24 h"
     },
-    "footer": "© 2025 Juanpa Quesada Caballero. Todos los derechos reservados."
+    "footer": "© {{year}} Juanpa Quesada Caballero",
+    "footerLink": "Código de este sitio ↗"
   },
   "messages": {
-    "success": "¡Mensaje enviado con éxito!",
-    "error": "Error al enviar el mensaje. Por favor, inténtalo de nuevo."
+    "success": "Mensaje enviado. Te respondo en menos de 24 h.",
+    "error": "No se pudo enviar. Escríbeme directamente a jpqcaballero@gmail.com.",
+    "network": "Sin conexión con el servidor. Escríbeme a jpqcaballero@gmail.com y lo resolvemos igual."
   },
   "a11y": {
     "toggleTheme": "Cambiar entre modo claro y oscuro",
     "openMenu": "Abrir menú de navegación",
-    "closeMenu": "Cerrar menú de navegación"
+    "closeMenu": "Cerrar menú de navegación",
+    "homeLink": "Juanpa Quesada Caballero — ir al inicio"
   }
 }

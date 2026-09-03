@@ -85,10 +85,10 @@ export default function About() {
 
           {/* Datos rápidos */}
           <div className="grid grid-cols-2 gap-4 text-sm text-light-subtle dark:text-dark-subtle">
-            <div><strong>📍 Ubicación:</strong> {t("about.location")}</div>
-            <div><strong>🎓 Carrera:</strong> {t("about.major")}</div>
-            <div><strong>💼 Rol:</strong> {t("about.rol")}</div>
-            <div><strong>🌐 Idiomas:</strong> {t("about.languages")}</div>
+            <div><strong>{t("about.labels.location")}:</strong> {t("about.location")}</div>
+            <div><strong>{t("about.labels.major")}:</strong> {t("about.major")}</div>
+            <div><strong>{t("about.labels.focus")}:</strong> {t("about.rol")}</div>
+            <div><strong>{t("about.labels.languages")}:</strong> {t("about.languages")}</div>
           </div>
         </motion.div>
       </div>
@@ -114,15 +114,12 @@ export default function About() {
       >
         {/* Timeline */}
         <ul className="space-y-4 border-l border-dark-border dark:border-dark-subtle pl-4 mt-14">
-          <li>
-            <div className="text-sm text-light-subtle dark:text-dark-subtle">{t("about.timeline.2021.description")}</div>
-          </li>
-          <li>
-            <div className="text-sm text-light-subtle dark:text-dark-subtle">{t("about.timeline.2023.description")}</div>
-          </li>
-          <li>
-            <div className="text-sm text-light-subtle dark:text-dark-subtle">{t("about.timeline.2024.description")}</div>
-          </li>
+          {["2021", "2023", "2024", "2025"].map((anio) => (
+            <li key={anio} className="flex gap-3">
+              <span className="font-mono text-xs text-light-accent dark:text-dark-accent pt-0.5 shrink-0">{anio}</span>
+              <span className="text-sm text-light-subtle dark:text-dark-subtle">{t(`about.timeline.${anio}`)}</span>
+            </li>
+          ))}
         </ul>
 
         {/* Testimonios */}

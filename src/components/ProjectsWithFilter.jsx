@@ -37,8 +37,8 @@ export default function ProjectsWithFilter() {
   const categories = [
     { key: "all", label: t("projects.type.all") },
     { key: "personal", label: t("projects.type.personal") },
-    { key: "desktop", label: t("projects.type.desktop") },
-    { key: "mobile", label: t("projects.type.mobile") },
+    { key: "freelance", label: t("projects.type.freelance") },
+    { key: "work", label: t("projects.type.work") },
   ];
 
   // `link: null` oculta el botón "Ver Proyecto" de la tarjeta.
@@ -52,7 +52,7 @@ export default function ProjectsWithFilter() {
       tech: ["React Native", "Firebase", "Expo"],
       file: "campo-app/App.tsx",
       link: null, // TODO: repo/demo de Campo App
-      type: "mobile",
+      type: "work",
       statusIndex: 2,
     },
     {
@@ -61,7 +61,7 @@ export default function ProjectsWithFilter() {
       tech: ["React", "Tailwind", "Netlify"],
       file: "instaladores/index.jsx",
       link: null, // TODO: URL del sitio del cliente
-      type: "desktop",
+      type: "freelance",
       statusIndex: 1,
     },
     {
@@ -82,7 +82,9 @@ export default function ProjectsWithFilter() {
       ? allProjects
       : allProjects.filter((project) => project.type === activeCategory);
 
-  const stages = ["Diseño", "Desarrollo", "Producción"];
+  // Antes estaban clavadas en español: con la interfaz en inglés el resto de la
+  // tarjeta se traducía y estas tres no.
+  const stages = ["design", "development", "production"];
   const colors = ["bg-[#22C55E]", "bg-[#EAB308]", "bg-[#3B82F6]"];
 
   return (
@@ -205,7 +207,7 @@ export default function ProjectsWithFilter() {
                         }`}
                       ></div>
                     )}
-                    <span className="mt-1">{stage}</span>
+                    <span className="mt-1">{t(`projects.stages.${stage}`)}</span>
                   </div>
                 ))}
               </div>

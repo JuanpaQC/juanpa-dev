@@ -1,46 +1,47 @@
 {
   "navbar": {
     "home": "Home",
-    "about": "About Me",
+    "about": "About",
     "projects": "Projects",
     "contact": "Contact"
   },
   "home": {
-    "subtitle": "Passionate about creating functional and engaging digital experiences",
-    "button": "View Projects"
+    "subtitle": "I build mobile apps with React Native, Expo and Firebase, working with AI agents: I write the spec, review the diff and own the result.",
+    "button": "See projects"
   },
   "about": {
-    "title": "About Me",
-    "description": "Hi! I'm Juanpa, a software developer passionate about creating functional, accessible, and personality-filled digital experiences.",
-    "bio": "I'm studying Computer Engineering at TEC of Costa Rica and have worked on real and academic projects, both web and mobile. I'm interested in user-centered design, good practices, and learning more every day.",
-    "location": "Costa Rica",
-    "rol": "Software Engineer",
-    "major": "Software Engineering",
-    "languages": "Spanish, English",
+    "title": "About",
+    "description": "I'm Juanpa. I've spent two years building mobile apps with React Native, Expo and Firebase, from idea to store.",
+    "bio": "I'm studying Computer Engineering at TEC in Costa Rica, with two years to go. I'm looking for an internship I can combine with classes, on a team that already runs code in production.",
+    "labels": {
+      "location": "Location",
+      "major": "Degree",
+      "focus": "Focus",
+      "languages": "Languages"
+    },
+    "location": "Costa Rica · UTC−6",
+    "major": "Computer Engineering, TEC",
+    "rol": "Mobile development with React Native",
+    "languages": "Native Spanish, professional English",
     "references": "References",
     "referencesDescription#1": "\"Working with Juanpa was an excellent experience. He always proposes creative solutions and knows how to listen.\"",
     "referencesDescription#2": "\"Juanpa is responsible, organized, and has great ability to solve technical problems calmly.\"",
     "timeline": {
-      "2024": {
-        "description": "2024 - Started freelance projects and professional portfolio"
-      },
-      "2023": {
-        "description": "2023 - Published my first mobile app with Expo + Firebase"
-      },
-      "2021": {
-        "description": "2021 — Began my journey in Computer Engineering"
-      }
+      "2021": "Started Computer Engineering at TEC.",
+      "2023": "Shipped my first mobile app with Expo and Firebase.",
+      "2024": "First freelance client: a real site, with a deadline and someone waiting for it.",
+      "2025": "Started building with AI agents: specs, AGENTS.md, and reviewing every diff."
     },
     "button": "Download CV",
-    "photoAlt": "Juanpa Quesada Caballero, Software Engineer, in Costa Rica"
+    "photoAlt": "Juanpa Quesada Caballero, mobile developer in Costa Rica"
   },
   "projects": {
     "title": "Projects",
     "type": {
       "all": "All",
       "personal": "Personal",
-      "desktop": "Freelance",
-      "mobile": "Work"
+      "freelance": "Freelance",
+      "work": "Work"
     },
     "titles": {
       "project1": "Campo App",
@@ -48,39 +49,48 @@
       "project3": "Animated Portfolio"
     },
     "descriptions": {
-      "project1": "Mobile app to classify agricultural land based on national technical criteria.",
-      "project2": "Professional landing page for an internet installation company.",
-      "project3": "Experimental portfolio design with custom animations."
+      "project1": "Classifying farmland meant cross-checking national technical criteria by hand. The app does it in the field.",
+      "project2": "An internet installation company had nothing but WhatsApp as a storefront. I built them a site that captures requests.",
+      "project3": "This site. My testbed for performance, accessibility and my agent workflow."
     },
-    "button": "View Project ↗",
-    "status": {
-      "desing": "In progress",
-      "development": "Completed",
-      "published": "Published"
+    "button": "View project ↗",
+    "stages": {
+      "design": "Design",
+      "development": "Development",
+      "production": "Production"
     }
   },
   "contact": {
-    "title": "Contact!",
+    "title": "Let's talk",
+    "lead": "Looking for an intern for your mobile team? I'll get back to you within 24 hours.",
     "form": {
       "name": "Name",
       "email": "Email",
       "message": "Message",
-      "button": "Send Message"
+      "messagePlaceholder": "Tell me what you need and by when.",
+      "button": "Send message",
+      "sending": "Sending…"
     },
     "social": {
-      "title": "My Networks:",
-      "button": "View Profile →",
-      "mail": "Send Email →"
+      "title": "Find me on",
+      "button": "View profile →",
+      "mail": "Email me →",
+      "repos": "{{n}} public repositories",
+      "linkedinTag": "Professional profile",
+      "mailTag": "I reply within 24 hours"
     },
-    "footer": "© 2025 Juanpa Quesada Caballero. All rights reserved."
+    "footer": "© {{year}} Juanpa Quesada Caballero",
+    "footerLink": "Source of this site ↗"
   },
   "messages": {
-    "success": "Message sent successfully!",
-    "error": "Error sending message. Please try again later."
+    "success": "Message sent. I'll get back to you within 24 hours.",
+    "error": "Couldn't send it. Email me directly at jpqcaballero@gmail.com.",
+    "network": "Can't reach the server. Email me at jpqcaballero@gmail.com and we'll sort it out anyway."
   },
   "a11y": {
     "toggleTheme": "Switch between light and dark mode",
     "openMenu": "Open navigation menu",
-    "closeMenu": "Close navigation menu"
+    "closeMenu": "Close navigation menu",
+    "homeLink": "Juanpa Quesada Caballero — go to home"
   }
 }
