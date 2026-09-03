@@ -156,6 +156,11 @@ export default function Navbar() {
         </ul>
       )}
 
+      {/* Región permanente para el cambio de idioma, por el mismo motivo. */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {langChangedMsg}
+      </div>
+
       <AnimatePresence>
         {langChangedMsg && (
           <LanguageToast message={langChangedMsg} onClose={() => setLangChangedMsg("")} />

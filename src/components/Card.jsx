@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-export default function Card({ platform, name, username, extra, image, link, icon }) {
+export default function Card({ platform, name, username, image, imageAlt, link, icon }) {
   const { t } = useTranslation();
 
   return (
@@ -25,14 +25,13 @@ export default function Card({ platform, name, username, extra, image, link, ico
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-7">
         <div className="flex items-center gap-4">
           {image ? (
-            <img src={image} alt="avatar" className="w-16 h-16 rounded-full" />
+            <img src={image} alt={imageAlt || ""} className="w-16 h-16 rounded-full" />
           ) : (
             <div className="text-5xl">{icon}</div>
           )}
           <div className="flex flex-col text-center md:text-left">
             <h3 className="text-lg font-bold">{name}</h3>
             <p className="text-sm text-light-subtle dark:text-dark-subtle">{username}</p>
-            {extra && <p className="text-xs text-light-subtle dark:text-dark-subtle">{extra}</p>}
           </div>
         </div>
 

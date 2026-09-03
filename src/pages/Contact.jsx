@@ -143,6 +143,7 @@ export default function Contact() {
                 name={`@${githubProfile.login}`}
                 username={t("contact.social.repos", { n: githubProfile.public_repos })}
                 image={githubProfile.avatar_url}
+                imageAlt={t("contact.social.avatarAlt", { name: githubProfile.login })}
                 link={githubProfile.html_url}
               />
             )}
@@ -175,15 +176,30 @@ export default function Contact() {
         {t("contact.footer", { year: new Date().getFullYear() })}
       </motion.div>
 
+      {/* Regiones vivas permanentes. Tienen que existir en el DOM ANTES de que
+          llegue el mensaje: si se montan a la vez que su contenido, la mayoría
+          de lectores de pantalla no anuncian nada.
+          El éxito es informativo y espera turno (status/polite); el error
+          interrumpe, porque el usuario acaba de perder lo que escribió. */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {toast.show && toast.type === "success" ? toast.text : ""}
+      </div>
+      <div role="alert" aria-live="assertive" className="sr-only">
+        {toast.show && toast.type !== "success" ? toast.text : ""}
+      </div>
+
       {/* Toast message */}
       <AnimatePresence>
         {toast.show && (
           <motion.div
+            // El anuncio lo hacen las regiones permanentes de abajo, no este
+            // nodo: aquí solo vive la parte visual.
+            aria-hidden="true"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.4 }}
-            className={`fixed bottom-6 right-6 z-50 px-6 py-4 rounded-xl shadow-lg border text-sm
+            className={`fixed bottom-6 right-6 z-50 max-w-xs px-6 py-4 rounded-xl shadow-lg border text-sm
               ${
                 toast.type === "success"
                   ? "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 border-green-300 dark:border-green-700"
@@ -191,7 +207,17 @@ export default function Contact() {
               }
             `}
           >
-            {toast.text}
+            <p>{toast.text}</p>
+            {/* Un error sin salida deja al usuario atascado: el correo directo
+                va como enlace, no como texto que haya que copiar a mano. */}
+            {toast.type !== "success" && (
+              <a
+                href="mailto:jpqcaballero@gmail.com"
+                className="mt-2 inline-block font-semibold underline underline-offset-2"
+              >
+                {t("messages.errorAction")} →
+              </a>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

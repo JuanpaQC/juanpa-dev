@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGithub, FaGitAlt } from "react-icons/fa";
 import { SiJavascript, SiTypescript, SiTailwindcss, SiFirebase, SiMongodb, SiExpress, SiNextdotjs, SiExpo, SiPostgresql } from "react-icons/si";
 
@@ -22,6 +23,8 @@ const technologies = [
 ];
 
 export default function TechCarousel() {
+  const { t } = useTranslation();
+
   return (
     // La marquesina pasa de Framer Motion a una animación CSS. Tres motivos:
     //  1. El `whileHover` que había declaraba una `transition` sin ninguna
@@ -39,7 +42,7 @@ export default function TechCarousel() {
         <div
           className="flex gap-8 w-max animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] motion-reduce:animate-none"
           role="list"
-          aria-label="Tecnologías con las que trabajo"
+          aria-label={t("about.stackLabel")}
         >
           {[...technologies, ...technologies].map(({ Icon, name }, index) => (
             <div

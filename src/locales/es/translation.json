@@ -33,7 +33,8 @@
       "2025": "Empecé a construir con agentes de IA: specs, AGENTS.md y revisión de cada diff."
     },
     "button": "Descargar CV",
-    "photoAlt": "Juanpa Quesada Caballero, desarrollador móvil en Costa Rica"
+    "photoAlt": "Juanpa Quesada Caballero, desarrollador móvil en Costa Rica",
+    "stackLabel": "Tecnologías con las que trabajo"
   },
   "projects": {
     "title": "Proyectos",
@@ -58,7 +59,8 @@
       "design": "Diseño",
       "development": "Desarrollo",
       "production": "Producción"
-    }
+    },
+    "empty": "Todavía no hay proyectos en esta categoría."
   },
   "contact": {
     "title": "Hablemos",
@@ -77,15 +79,17 @@
       "mail": "Escribirme →",
       "repos": "{{n}} repositorios públicos",
       "linkedinTag": "Perfil profesional",
-      "mailTag": "Respondo en menos de 24 h"
+      "mailTag": "Respondo en menos de 24 h",
+      "avatarAlt": "Foto de perfil de {{name}} en GitHub"
     },
     "footer": "© {{year}} Juanpa Quesada Caballero",
     "footerLink": "Código de este sitio ↗"
   },
   "messages": {
     "success": "Mensaje enviado. Te respondo en menos de 24 h.",
-    "error": "No se pudo enviar. Escríbeme directamente a jpqcaballero@gmail.com.",
-    "network": "Sin conexión con el servidor. Escríbeme a jpqcaballero@gmail.com y lo resolvemos igual."
+    "error": "No se pudo enviar el mensaje.",
+    "network": "Sin conexión con el servidor.",
+    "errorAction": "Escríbeme por correo"
   },
   "a11y": {
     "toggleTheme": "Cambiar entre modo claro y oscuro",

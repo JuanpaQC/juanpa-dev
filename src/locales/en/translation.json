@@ -33,7 +33,8 @@
       "2025": "Started building with AI agents: specs, AGENTS.md, and reviewing every diff."
     },
     "button": "Download CV",
-    "photoAlt": "Juanpa Quesada Caballero, mobile developer in Costa Rica"
+    "photoAlt": "Juanpa Quesada Caballero, mobile developer in Costa Rica",
+    "stackLabel": "Technologies I work with"
   },
   "projects": {
     "title": "Projects",
@@ -58,7 +59,8 @@
       "design": "Design",
       "development": "Development",
       "production": "Production"
-    }
+    },
+    "empty": "No projects in this category yet."
   },
   "contact": {
     "title": "Let's talk",
@@ -77,15 +79,17 @@
       "mail": "Email me →",
       "repos": "{{n}} public repositories",
       "linkedinTag": "Professional profile",
-      "mailTag": "I reply within 24 hours"
+      "mailTag": "I reply within 24 hours",
+      "avatarAlt": "{{name}}'s GitHub profile picture"
     },
     "footer": "© {{year}} Juanpa Quesada Caballero",
     "footerLink": "Source of this site ↗"
   },
   "messages": {
     "success": "Message sent. I'll get back to you within 24 hours.",
-    "error": "Couldn't send it. Email me directly at jpqcaballero@gmail.com.",
-    "network": "Can't reach the server. Email me at jpqcaballero@gmail.com and we'll sort it out anyway."
+    "error": "The message couldn't be sent.",
+    "network": "Can't reach the server.",
+    "errorAction": "Email me instead"
   },
   "a11y": {
     "toggleTheme": "Switch between light and dark mode",

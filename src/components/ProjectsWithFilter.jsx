@@ -127,6 +127,12 @@ export default function ProjectsWithFilter() {
       </motion.div>
 
       {/* Grid de proyectos */}
+      {filteredProjects.length === 0 && (
+        <p className="text-center text-sm text-light-subtle dark:text-dark-subtle py-10">
+          {t("projects.empty")}
+        </p>
+      )}
+
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project, index) => (
           <motion.div
