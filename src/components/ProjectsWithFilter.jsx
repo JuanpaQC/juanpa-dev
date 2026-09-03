@@ -36,42 +36,51 @@ export default function ProjectsWithFilter() {
 
   const categories = [
     { key: "all", label: t("projects.type.all") },
-    { key: "personal", label: t("projects.type.personal") },
+    { key: "academic", label: t("projects.type.academic") },
     { key: "freelance", label: t("projects.type.freelance") },
-    { key: "work", label: t("projects.type.work") },
+    { key: "personal", label: t("projects.type.personal") },
   ];
 
   // `link: null` oculta el botón "Ver Proyecto" de la tarjeta.
   // Los tres apuntaban a marcadores de posición de plantilla
   // (github.com/tuusuario/..., tusitioweb.netlify.app) que devolvían 404.
   // Para publicar uno: sustituir null por la URL real del repo o de la demo.
+  // `link: null` oculta el botón de la tarjeta. Se sustituye por la URL real
+  // (repo o demo) cuando el proyecto sea público.
+  // AgriVision va primera a propósito: el motor de sincronización con
+  // resolución de conflictos es la pieza técnica más difícil del portafolio.
   const allProjects = [
     {
-      title: t("projects.titles.project1"),
-      description: t("projects.descriptions.project1"),
-      tech: ["React Native", "Firebase", "Expo"],
-      file: "campo-app/App.tsx",
-      link: null, // TODO: repo/demo de Campo App
-      type: "work",
+      key: "agrivision",
+      tech: ["React Native", "Expo", "Firebase", "Jest"],
+      file: "agrivision/sync/resolver.js",
+      link: null, // TODO: repo o demo de AgriVision
+      type: "academic",
       statusIndex: 2,
     },
     {
-      title: t("projects.titles.project2"),
-      description: t("projects.descriptions.project2"),
+      key: "agroclass",
+      tech: ["React Native", "Expo", "Node", "Firebase"],
+      file: "agroclass/survey/Flow.jsx",
+      link: null, // TODO: repo o demo de AgroClass
+      type: "academic",
+      statusIndex: 1,
+    },
+    {
+      key: "instaladores",
       tech: ["React", "Tailwind", "Netlify"],
       file: "instaladores/index.jsx",
       link: null, // TODO: URL del sitio del cliente
       type: "freelance",
-      statusIndex: 1,
+      statusIndex: 2,
     },
     {
-      title: t("projects.titles.project3"),
-      description: t("projects.descriptions.project3"),
+      key: "portfolio",
       tech: ["React", "Framer Motion", "Tailwind"],
       file: "juanpaqc/Hero.jsx",
-      link: null, // TODO: repo/demo del portfolio animado
+      link: "https://github.com/JuanpaQC/juanpa-dev",
       type: "personal",
-      statusIndex: 0,
+      statusIndex: 2,
     },
   ];
 
@@ -136,7 +145,7 @@ export default function ProjectsWithFilter() {
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project, index) => (
           <motion.div
-            key={index}
+            key={project.key}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -156,8 +165,8 @@ export default function ProjectsWithFilter() {
 
             {/* Contenido principal del proyecto */}
             <div className="p-5 space-y-3">
-              <h3 className="text-xl font-semibold text-light-text dark:text-white">{project.title}</h3>
-              <p className="text-sm text-light-subtle dark:text-dark-subtle">{project.description}</p>
+              <h3 className="text-xl font-semibold text-light-text dark:text-white">{t(`projects.titles.${project.key}`)}</h3>
+              <p className="text-sm text-light-subtle dark:text-dark-subtle">{t(`projects.descriptions.${project.key}`)}</p>
 
               {/* Tecnologías usadas. El nombre va en texto junto al icono, no solo
                   como atributo title: un SVG no es contenido indexable, así que

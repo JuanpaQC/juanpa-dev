@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import TechCarousel from "../components/TechCarousel";
 // La foto se sirve recortada y en WebP: el original era de 3024x4032 y 7.6 MB para mostrarse a 240 px.
 import profile480 from "../assets/opt/juanpa-profile-480.webp";
 import profile960 from "../assets/opt/juanpa-profile-960.webp";
@@ -90,18 +89,36 @@ export default function About() {
             <div><strong>{t("about.labels.focus")}:</strong> {t("about.rol")}</div>
             <div><strong>{t("about.labels.languages")}:</strong> {t("about.languages")}</div>
           </div>
+
+          <p className="text-sm text-light-subtle dark:text-dark-subtle max-w-[62ch]">
+            {t("about.craft")}
+          </p>
         </motion.div>
       </div>
 
-      {/* Tecnologías */}
+      {/* Stack por niveles */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="flex flex-wrap gap-4 mt-12"
+        className="w-full mt-12"
       >
-        <TechCarousel />
+        <h3 className="font-display text-lg font-semibold tracking-[-0.01em] mb-4">
+          {t("about.stack.title")}
+        </h3>
+        <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          {["ships", "real", "academic", "learning"].map((nivel) => (
+            <div key={nivel}>
+              <dt className="font-mono text-xs uppercase tracking-[0.12em] text-light-accent dark:text-dark-accent mb-1.5">
+                {t(`about.stack.${nivel}`)}
+              </dt>
+              <dd className="font-mono text-sm text-light-subtle dark:text-dark-subtle">
+                {t(`about.stack.${nivel}List`)}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </motion.div>
 
       {/* Timeline */}

@@ -6,22 +6,22 @@
     "contact": "Contact"
   },
   "home": {
-    "subtitle": "I build mobile apps with React Native, Expo and Firebase, working with AI agents: I write the spec, review the diff and own the result.",
+    "subtitle": "Mobile software engineer. I take React Native apps from written spec to store release — offline-first Firebase sync, REST API integration, tested with Jest. I work with AI coding agents and review every change before it reaches main.",
     "button": "See projects"
   },
   "about": {
     "title": "About",
-    "description": "I'm Juanpa. I've spent two years building mobile apps with React Native, Expo and Firebase, from idea to store.",
-    "bio": "I'm studying Computer Engineering at TEC in Costa Rica, with two years to go. I'm looking for an internship I can combine with classes, on a team that already runs code in production.",
+    "description": "I'm studying Computer Engineering at TEC in Costa Rica, graduating in 2028. I work in mobile development with React Native and Expo, and I've built two applications for TEC research projects that field technicians use today.",
+    "bio": "I write the spec before I write code, implement it with AI coding agents, and review every diff before it lands. Architecture decisions go into ADRs in the repository, with their context and consequences. I'm looking for a team with code in production and real code review.",
     "labels": {
       "location": "Location",
       "major": "Degree",
       "focus": "Focus",
       "languages": "Languages"
     },
-    "location": "Costa Rica · UTC−6",
+    "location": "Costa Rica · UTC−6, full overlap with US business hours",
     "major": "Computer Engineering, TEC",
-    "rol": "Mobile development with React Native",
+    "rol": "Mobile development · React Native and Expo",
     "languages": "Native Spanish, professional English",
     "references": "References",
     "referencesDescription#1": "\"Working with Juanpa was an excellent experience. He always proposes creative solutions and knows how to listen.\"",
@@ -34,25 +34,39 @@
     },
     "button": "Download CV",
     "photoAlt": "Juanpa Quesada Caballero, mobile developer in Costa Rica",
-    "stackLabel": "Technologies I work with"
+    "stackLabel": "Technologies I work with",
+    "stack": {
+      "title": "What I work with",
+      "ships": "I ship with",
+      "shipsList": "React Native · Expo · Firebase · React · JavaScript · Git",
+      "real": "Used in real projects",
+      "realList": "Node.js · REST APIs · Cloudinary · Tailwind · Figma",
+      "academic": "University coursework",
+      "academicList": "Java · Python · Object-oriented design · Agile",
+      "learning": "Learning now",
+      "learningList": "TypeScript · Testing · CI/CD"
+    },
+    "craft": "Before I wrote code I did photography, and it left me with the habit of looking closely — composition, contrast, what doesn't belong in the frame. It's the same attention I bring to an interface."
   },
   "projects": {
     "title": "Projects",
     "type": {
       "all": "All",
-      "personal": "Personal",
+      "academic": "Institutional",
       "freelance": "Freelance",
-      "work": "Work"
+      "personal": "Personal"
     },
     "titles": {
-      "project1": "Campo App",
-      "project2": "Installers Website",
-      "project3": "Animated Portfolio"
+      "agrivision": "AgriVision",
+      "agroclass": "AgroClass",
+      "instaladores": "Installers Website",
+      "portfolio": "This portfolio"
     },
     "descriptions": {
-      "project1": "Classifying farmland meant cross-checking national technical criteria by hand. The app does it in the field.",
-      "project2": "An internet installation company had nothing but WhatsApp as a storefront. I built them a site that captures requests.",
-      "project3": "This site. My testbed for performance, accessibility and my agent workflow."
+      "agrivision": "There's no signal in the barn. The app captures herd assessments offline and reconciles them once the network returns, with Last-Write-Wins conflict resolution over Firebase.",
+      "agroclass": "Classifying land use meant cross-checking national technical criteria by hand. Guided 14-category flow, geolocation, background photo upload and PDF report generation.",
+      "instaladores": "An internet installation company had nothing but WhatsApp as a storefront. I built them a site that captures requests.",
+      "portfolio": "This site, rebuilt from an audit: LCP went from 1132 ms to 96 ms after removing the opacity fade on the element that marked it."
     },
     "button": "View project ↗",
     "stages": {
@@ -64,7 +78,7 @@
   },
   "contact": {
     "title": "Let's talk",
-    "lead": "Looking for an intern for your mobile team? I'll get back to you within 24 hours.",
+    "lead": "I'm looking for an internship or a junior mobile engineering role I can combine with classes. Based in Costa Rica, full overlap with US business hours. I reply within 24 hours.",
     "form": {
       "name": "Name",
       "email": "Email",

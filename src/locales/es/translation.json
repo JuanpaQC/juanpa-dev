@@ -6,22 +6,22 @@
     "contact": "Contacto"
   },
   "home": {
-    "subtitle": "Desarrollo apps móviles con React Native, Expo y Firebase, trabajando con agentes de IA: escribo la especificación, reviso el diff y respondo por el resultado.",
+    "subtitle": "Ingeniero de software móvil. Llevo apps de React Native de la especificación a la tienda: sincronización offline-first sobre Firebase, integración de APIs y pruebas con Jest. Trabajo con agentes de IA y reviso cada cambio antes de que llegue a main.",
     "button": "Ver proyectos"
   },
   "about": {
     "title": "Sobre mí",
-    "description": "Soy Juanpa. Llevo dos años construyendo apps móviles con React Native, Expo y Firebase, de la idea a la tienda.",
-    "bio": "Estudio Ingeniería en Computación en el TEC de Costa Rica y me quedan dos años. Busco una pasantía compatible con las clases, en un equipo que ya tenga código en producción.",
+    "description": "Estudio Ingeniería en Computación en el TEC de Costa Rica y me gradúo en 2028. Trabajo en desarrollo móvil con React Native y Expo, y he construido dos aplicaciones para proyectos de investigación del TEC que hoy usan técnicos en campo.",
+    "bio": "Escribo la especificación antes de escribir código, la implemento con agentes de IA y reviso cada diff antes de integrarlo. Las decisiones de arquitectura quedan en ADRs dentro del repositorio, con su contexto y sus consecuencias. Busco un equipo con código en producción y revisión de código.",
     "labels": {
       "location": "Ubicación",
       "major": "Carrera",
       "focus": "Enfoque",
       "languages": "Idiomas"
     },
-    "location": "Costa Rica · UTC−6",
+    "location": "Costa Rica · UTC−6, solapamiento completo con horario de EE. UU.",
     "major": "Ingeniería en Computación, TEC",
-    "rol": "Desarrollo móvil con React Native",
+    "rol": "Desarrollo móvil · React Native y Expo",
     "languages": "Español nativo, inglés profesional",
     "references": "Referencias",
     "referencesDescription#1": "\"Trabajar con Juanpa fue una experiencia excelente. Siempre propone soluciones creativas y sabe escuchar.\"",
@@ -34,25 +34,39 @@
     },
     "button": "Descargar CV",
     "photoAlt": "Juanpa Quesada Caballero, desarrollador móvil en Costa Rica",
-    "stackLabel": "Tecnologías con las que trabajo"
+    "stackLabel": "Tecnologías con las que trabajo",
+    "stack": {
+      "title": "Con qué trabajo",
+      "ships": "Entrego con",
+      "shipsList": "React Native · Expo · Firebase · React · JavaScript · Git",
+      "real": "Uso en proyectos reales",
+      "realList": "Node.js · APIs REST · Cloudinary · Tailwind · Figma",
+      "academic": "Base académica",
+      "academicList": "Java · Python · Diseño orientado a objetos · Metodologías ágiles",
+      "learning": "Aprendiendo ahora",
+      "learningList": "TypeScript · Testing · CI/CD"
+    },
+    "craft": "Antes de programar hacía fotografía, y de ahí me quedó la costumbre de mirar el detalle: composición, contraste, qué sobra en el encuadre. Es la misma atención que aplico a una interfaz."
   },
   "projects": {
     "title": "Proyectos",
     "type": {
       "all": "Todos",
-      "personal": "Personal",
+      "academic": "Institucional",
       "freelance": "Freelance",
-      "work": "Trabajo"
+      "personal": "Personal"
     },
     "titles": {
-      "project1": "Campo App",
-      "project2": "Sitio Web Instaladores",
-      "project3": "Portfolio Animado"
+      "agrivision": "AgriVision",
+      "agroclass": "AgroClass",
+      "instaladores": "Sitio Web Instaladores",
+      "portfolio": "Este portafolio"
     },
     "descriptions": {
-      "project1": "Clasificar un terreno agrícola exigía cruzar a mano los criterios técnicos nacionales. La app lo hace en el campo.",
-      "project2": "Una empresa de instalación de internet solo tenía WhatsApp como escaparate. Le construí un sitio que capta solicitudes.",
-      "project3": "Este sitio. Banco de pruebas de rendimiento, accesibilidad y de mi flujo con agentes."
+      "agrivision": "En el establo no hay señal. La app captura las evaluaciones del hato sin conexión y las reconcilia sola al volver a la red, con resolución de conflictos Last-Write-Wins sobre Firebase.",
+      "agroclass": "Clasificar el uso del suelo exigía cruzar a mano criterios técnicos nacionales. Flujo guiado de 14 categorías, geolocalización, fotos en segundo plano y generación del informe en PDF.",
+      "instaladores": "Una empresa de instalación de internet solo tenía WhatsApp como escaparate. Le construí un sitio que capta solicitudes.",
+      "portfolio": "Este sitio, reconstruido a partir de una auditoría: el LCP pasó de 1132 ms a 96 ms al quitar el fundido del elemento que lo marcaba."
     },
     "button": "Ver proyecto ↗",
     "stages": {
@@ -64,7 +78,7 @@
   },
   "contact": {
     "title": "Hablemos",
-    "lead": "¿Buscas un pasante para tu equipo móvil? Te respondo en menos de 24 horas.",
+    "lead": "Busco pasantía o posición junior en desarrollo móvil, compatible con mis clases. Trabajo desde Costa Rica, con solapamiento completo con horario de EE. UU. Respondo en menos de 24 horas.",
     "form": {
       "name": "Nombre",
       "email": "Correo electrónico",

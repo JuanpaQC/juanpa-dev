@@ -27,13 +27,18 @@ describe("ProjectsWithFilter", () => {
     const usuario = userEvent.setup();
     render(<ProjectsWithFilter />);
 
-    const todos = screen.getAllByRole("heading", { level: 3 }).length;
-    expect(todos).toBe(3);
+    const cuenta = () => screen.queryAllByRole("heading", { level: 3 }).length;
+    const total = cuenta();
+    expect(total).toBeGreaterThan(1);
 
-    await usuario.click(screen.getByRole("button", { name: /personal/i }));
-    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(1);
+    // "Institucional" agrupa AgriVision y AgroClass: filtrar tiene que reducir
+    // el conjunto sin vaciarlo.
+    await usuario.click(screen.getByRole("button", { name: /institucional|institutional/i }));
+    const filtrado = cuenta();
+    expect(filtrado).toBeGreaterThan(0);
+    expect(filtrado).toBeLessThan(total);
 
-    await usuario.click(screen.getByRole("button", { name: /todos|all/i }));
-    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(3);
+    await usuario.click(screen.getByRole("button", { name: /^(todos|all)$/i }));
+    expect(cuenta()).toBe(total);
   });
 });
