@@ -15,6 +15,11 @@ export default {
         'dark-text': '#E5E5E5',
         'dark-subtle': '#94A3B8',
         'dark-border': '#112B3C',
+        // Borde de controles en modo oscuro. 'dark-border' da 1.19:1 sobre el
+        // fondo y WCAG 1.4.11 exige 3:1 para el límite visual de un control;
+        // este da 3.35:1. 'dark-border' se queda solo para separadores
+        // decorativos, como el del navbar.
+        'dark-border-strong': '#52708A',
         'dark-border-mac': '#1e1e1e',
 
         // 📖 Modo claro tipo libro

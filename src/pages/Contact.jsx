@@ -90,7 +90,7 @@ export default function Contact() {
                   value={formData[field]}
                   onChange={handleChange}
                   required
-                  className="px-5 py-3 rounded-xl border border-light-border-strong dark:border-dark-border bg-white dark:bg-dark-background text-black dark:text-dark-text outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent transition"
+                  className="px-5 py-3 rounded-xl border border-light-border-strong dark:border-dark-border-strong bg-white dark:bg-dark-background text-black dark:text-dark-text outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent transition"
                 />
               ) : (
                 <textarea
@@ -100,7 +100,7 @@ export default function Contact() {
                   value={formData[field]}
                   onChange={handleChange}
                   required
-                  className="px-5 py-3 rounded-xl border border-light-border-strong dark:border-dark-border bg-white dark:bg-dark-background text-black dark:text-dark-text outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent transition"
+                  className="px-5 py-3 rounded-xl border border-light-border-strong dark:border-dark-border-strong bg-white dark:bg-dark-background text-black dark:text-dark-text outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent transition"
                 ></textarea>
               )}
             </div>
