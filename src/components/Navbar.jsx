@@ -44,7 +44,7 @@ export default function Navbar() {
         ${showNavbar || menuOpen ? "translate-y-0" : "-translate-y-[150%]"}`}
       style={{ boxShadow: '0 0 20px rgba(0, 246, 237, 0.1)' }}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center gap-6">
         {/* El logotipo no es el encabezado de la página: era un segundo <h1> que
             competía con el del hero. Ahora es un enlace al inicio. */}
         <a
@@ -69,12 +69,12 @@ export default function Navbar() {
         </div>
 
         {/* Opciones Desktop */}
-        <ul className="hidden md:flex space-x-6 items-center font-mono text-lg md:text-xl">
+        <ul className="hidden md:flex space-x-5 lg:space-x-6 items-center font-mono text-sm lg:text-base">
           {['home', 'about', 'projects', 'contact'].map((id) => (
             <a
               key={id}
               href={`#${id}`}
-              className="relative group transition-colors duration-100 ease-in-out"
+              className="relative group whitespace-nowrap transition-colors duration-100 ease-in-out"
             >
               <span className="group-hover:text-light-accent dark:group-hover:text-dark-accent transition-colors duration-300">{t(`navbar.${id}`)}</span>
               <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-light-accent dark:bg-dark-accent transition-all duration-300 group-hover:w-full"></span>

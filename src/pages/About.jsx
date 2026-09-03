@@ -110,10 +110,15 @@ export default function About() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="mt-6 grid md:grid-cols-2 gap-10 items-start w-full"
+        // La rejilla era grid-cols-2 y las referencias se tiraban encima con
+        // md:ml-[-180px] para acercarlas al timeline. Ese margen negativo es un
+        // valor fijo que asume un contenedor ancho: a 1280 px provocaba 140 px
+        // de solape con el timeline. Ahora las columnas son asimétricas, así
+        // que las referencias empiezan antes por geometría y no por un empujón.
+        className="mt-10 grid gap-8 lg:gap-12 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start w-full"
       >
         {/* Timeline */}
-        <ul className="space-y-4 border-l border-dark-border dark:border-dark-subtle pl-4 mt-14">
+        <ul className="space-y-4 border-l border-light-border dark:border-dark-subtle pl-4">
           {["2021", "2023", "2024", "2025"].map((anio) => (
             <li key={anio} className="flex gap-3">
               <span className="font-mono text-xs text-light-accent dark:text-dark-accent pt-0.5 shrink-0">{anio}</span>
@@ -123,18 +128,17 @@ export default function About() {
         </ul>
 
         {/* Testimonios */}
-        <div className="space-y-6 mt-10 md:mt-0 w-full md:w-auto md:ml-[-180px]">
-
-          <h3 className="text-2xl font-semibold text-center md:text-left">
+        <div className="space-y-6 w-full">
+          <h3 className="font-display text-lg font-semibold tracking-[-0.01em]">
             {t("about.references")}
           </h3>
 
-          <blockquote className="bg-light-surface dark:bg-dark-surface/30 p-6 rounded-xl border border-dark-border dark:border-dark-subtle text-sm text-light-subtle dark:text-dark-subtle">
+          <blockquote className="bg-light-surface dark:bg-dark-surface/30 p-6 rounded-xl border border-light-border dark:border-dark-subtle text-sm text-light-subtle dark:text-dark-subtle">
             {t("about.referencesDescription#1")}
             <footer className="mt-3 text-right text-xs text-light-subtle dark:text-dark-subtle">— Ana Rodríguez, UX Designer</footer>
           </blockquote>
 
-          <blockquote className="bg-light-surface dark:bg-dark-surface/30 p-6 rounded-xl border border-dark-border dark:border-dark-subtle text-sm text-light-subtle dark:text-dark-subtle">
+          <blockquote className="bg-light-surface dark:bg-dark-surface/30 p-6 rounded-xl border border-light-border dark:border-dark-subtle text-sm text-light-subtle dark:text-dark-subtle">
             {t("about.referencesDescription#2")}
             <footer className="mt-3 text-right text-xs text-light-subtle dark:text-dark-subtle">— Carlos Méndez, Dev Team Lead</footer>
           </blockquote>
