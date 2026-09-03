@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next";
 import {
   SiReact, SiExpo, SiFirebase, SiJavascript, SiGit, SiNodedotjs,
   SiCloudinary, SiTailwindcss, SiFigma, SiTypescript, SiJest,
-  SiGithubactions, SiOpenjdk, SiPython,
+  SiGithubactions, SiPython,
 } from "react-icons/si";
-import { FaExchangeAlt, FaSitemap, FaSyncAlt } from "react-icons/fa";
+import { FaExchangeAlt, FaSitemap, FaSyncAlt, FaJava } from "react-icons/fa";
 
 /**
  * Stack por niveles, con logotipo y el nombre al pasar el cursor.
@@ -48,7 +48,7 @@ const niveles = [
   {
     id: "academic",
     items: [
-      { Icon: SiOpenjdk, name: "Java", hover: "group-hover:text-[#F89820]" },
+      { Icon: FaJava, name: "Java", hover: "group-hover:text-[#E76F00]" },
       { Icon: SiPython, name: "Python", hover: "group-hover:text-[#5B9BD5]" },
       // Glifo del ciclo de sprint, no el logotipo de Scrum Alliance: usar la
       // marca de la organización insinuaría una certificación que no tiene.
