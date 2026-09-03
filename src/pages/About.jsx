@@ -21,7 +21,7 @@ export default function About() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl md:text-4xl font-bold text-center w-full mb-10 text-light-accent dark:text-dark-accent"
+        className="font-display text-2xl md:text-[1.75rem] font-bold tracking-[-0.022em] text-center w-full mb-10 text-light-text dark:text-dark-text"
       >
         {t("about.title")}
       </motion.h2>
@@ -37,10 +37,11 @@ export default function About() {
           className="w-full md:w-1/3 flex justify-center md:justify-start"
         >
           <div className="translate-x-6 md:translate-x-12 bg-light-surface dark:bg-dark-border-mac rounded-xl shadow-lg overflow-hidden border border-light-border dark:border-gray-600 w-fit">
-            <div className="flex gap-2 px-3 py-2 bg-light-border dark:bg-[#2c2c2e] border-b border-light-border dark:border-gray-600">
-              <span className="w-3 h-3 rounded-full bg-red-500"></span>
-              <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-              <span className="w-3 h-3 rounded-full bg-green-500"></span>
+            <div className="flex items-center gap-2 px-3 py-2 bg-light-border dark:bg-[#2c2c2e] border-b border-light-border dark:border-gray-600">
+              <span className="w-3 h-3 rounded-full bg-[#FF5F57] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+              <span className="w-3 h-3 rounded-full bg-[#FEBC2E] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+              <span className="w-3 h-3 rounded-full bg-[#28C840] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+              <span className="ml-2 font-mono text-xs tracking-wide text-light-subtle dark:text-dark-subtle">~/juanpa.jpeg</span>
             </div>
             <picture>
               <source

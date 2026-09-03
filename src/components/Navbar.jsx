@@ -49,7 +49,7 @@ export default function Navbar() {
             competía con el del hero. Ahora es un enlace al inicio. */}
         <a
           href="#home"
-          className="text-2xl lg:text-4xl tracking-tight whitespace-nowrap"
+          className="font-display text-2xl lg:text-3xl tracking-[-0.02em] whitespace-nowrap"
         >
           Juanpa Quesada
         </a>
@@ -68,7 +68,7 @@ export default function Navbar() {
         </div>
 
         {/* Opciones Desktop */}
-        <ul className="hidden md:flex space-x-6 items-center font-pixel text-lg md:text-xl">
+        <ul className="hidden md:flex space-x-6 items-center font-mono text-lg md:text-xl">
           {['home', 'about', 'projects', 'contact'].map((id) => (
             <a
               key={id}

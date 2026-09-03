@@ -38,12 +38,15 @@ export default {
 
         black: '#000000',
       },
+      // Tres familias, dos voces. Antes había cinco declaradas: tres no se
+      // usaban nunca y ninguna llegaba a cargarse.
+      // Se sobrescriben `sans` y `mono`, que son las claves POR DEFECTO de
+      // Tailwind: así todo el texto sin clase de fuente hereda Plex Sans, y el
+      // `font-mono` del efecto de tecleo pasa a Plex Mono sin tocar el JSX.
       fontFamily: {
-        press: ['"Press Start 2P"', 'cursive'],
-        pixel: ['"VT323"', 'monospace'],
-        orbiton: ['"Orbitron"', 'sans-serif'],
-        exo : ['"Exo 2"', 'sans-serif'],
-        share : ['"Share Tech Mono"', 'monospace'],
+        display: ['"Chakra Petch"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
     },
   },

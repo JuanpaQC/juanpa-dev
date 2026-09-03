@@ -50,6 +50,7 @@ export default function ProjectsWithFilter() {
       title: t("projects.titles.project1"),
       description: t("projects.descriptions.project1"),
       tech: ["React Native", "Firebase", "Expo"],
+      file: "campo-app/App.tsx",
       link: null, // TODO: repo/demo de Campo App
       type: "mobile",
       statusIndex: 2,
@@ -58,6 +59,7 @@ export default function ProjectsWithFilter() {
       title: t("projects.titles.project2"),
       description: t("projects.descriptions.project2"),
       tech: ["React", "Tailwind", "Netlify"],
+      file: "instaladores/index.jsx",
       link: null, // TODO: URL del sitio del cliente
       type: "desktop",
       statusIndex: 1,
@@ -66,6 +68,7 @@ export default function ProjectsWithFilter() {
       title: t("projects.titles.project3"),
       description: t("projects.descriptions.project3"),
       tech: ["React", "Framer Motion", "Tailwind"],
+      file: "juanpaqc/Hero.jsx",
       link: null, // TODO: repo/demo del portfolio animado
       type: "personal",
       statusIndex: 0,
@@ -93,7 +96,7 @@ export default function ProjectsWithFilter() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.4 }}
         transition={{ duration: 0.8 }}
-        className="text-3xl md:text-4xl font-bold mb-8 text-center text-light-accent dark:text-dark-accent"
+        className="font-display text-2xl md:text-[1.75rem] font-bold tracking-[-0.022em] mb-8 text-center text-light-text dark:text-dark-text"
       >
         {t("projects.title")}
       </motion.h2>
@@ -134,10 +137,13 @@ export default function ProjectsWithFilter() {
             className="relative rounded-xl shadow-lg overflow-hidden border border-light-border dark:border-gray-500 bg-light-surface dark:bg-[#1e1e1e] hover:z-10"
           >
             {/* Header estilo ventana Mac */}
-            <div className="flex gap-2 px-3 py-2 bg-light-border dark:bg-[#2c2c2e] border-b border-light-border dark:border-gray-600">
-              <span className="w-3 h-3 rounded-full bg-red-500"></span>
-              <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-              <span className="w-3 h-3 rounded-full bg-green-500"></span>
+            <div className="flex items-center gap-2 px-3 py-2 bg-light-border dark:bg-[#2c2c2e] border-b border-light-border dark:border-gray-600">
+              <span className="w-3 h-3 rounded-full bg-[#FF5F57] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+              <span className="w-3 h-3 rounded-full bg-[#FEBC2E] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+              <span className="w-3 h-3 rounded-full bg-[#28C840] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+              <span className="ml-2 font-mono text-xs tracking-wide text-light-subtle dark:text-dark-subtle truncate">
+                {project.file}
+              </span>
             </div>
 
             {/* Contenido principal del proyecto */}

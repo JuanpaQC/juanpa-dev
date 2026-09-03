@@ -28,6 +28,24 @@
          desaparece, Google revoca el acceso a la propiedad. -->
     <meta name="google-site-verification" content="DOqB0SHznQNQrW_VWNs4S8T_HwpKGbgojqR25J4UMI8" />
 
+    <!-- ============ TIPOGRAFÍA ============
+         Antes: cinco familias declaradas en tailwind.config.js y NINGUNA cargada.
+         El sitio se pintaba con la fuente del sistema del visitante, así que se
+         veía distinto en cada máquina.
+         Chakra Petch  -> display. Mismo registro sci-fi que buscaba Orbitron,
+                          pero con minúsculas resueltas y pesos reales.
+         IBM Plex Mono -> terminal, navbar y datos.
+         IBM Plex Sans -> cuerpo. Misma superfamilia que Plex Mono, así que
+                          alinean sin trucos.
+         El subconjunto `latin` cubre ñ, tildes, ¿ y ¡ sin bytes extra.
+         Total: 70 KB en 4 archivos woff2. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    />
+
     <!-- ============ ICONOS ============ -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />

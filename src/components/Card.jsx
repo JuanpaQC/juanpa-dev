@@ -12,12 +12,12 @@ export default function Card({ platform, name, username, extra, image, link, ico
     >
       {/* Header */}
       <div className="absolute top-4 left-4 flex gap-2">
-        <span className="w-2.5 h-2.5 bg-red-500 rounded-full"></span>
-        <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full"></span>
-        <span className="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+        <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
+        <span className="w-2.5 h-2.5 rounded-full bg-[#28C840] shadow-[inset_0_0_0_0.5px_rgba(0,0,0,.22)]"></span>
       </div>
 
-      <div className="absolute top-4 right-4 text-xs font-semibold tracking-wide text-light-subtle dark:text-dark-subtle">
+      <div className="absolute top-4 right-4 font-mono text-xs tracking-wide text-light-subtle dark:text-dark-subtle">
         {platform}
       </div>
 

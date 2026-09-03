@@ -104,7 +104,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="block font-orbiton text-light-accent dark:text-dark-accent"
+              className="block font-display text-light-accent dark:text-dark-accent"
             >
               Juanpa Quesada Caballero
             </motion.span>
