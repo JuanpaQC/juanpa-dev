@@ -25,29 +25,22 @@ import { FaExchangeAlt, FaSitemap, FaSyncAlt, FaJava } from "react-icons/fa";
  */
 const niveles = [
   {
-    id: "ships",
+    id: "works",
     items: [
       { Icon: SiReact, name: "React Native", hover: "group-hover:text-[#61DAFB]" },
       { Icon: SiExpo, name: "Expo", hover: "group-hover:text-light-text dark:group-hover:text-white" },
       { Icon: SiFirebase, name: "Firebase", hover: "group-hover:text-[#FFCA28]" },
       { Icon: SiReact, name: "React", hover: "group-hover:text-[#61DAFB]" },
       { Icon: SiJavascript, name: "JavaScript", hover: "group-hover:text-[#E8CE1B]" },
-      { Icon: SiGit, name: "Git", hover: "group-hover:text-[#F05032]" },
-    ],
-  },
-  {
-    id: "real",
-    items: [
       { Icon: SiNodedotjs, name: "Node.js", hover: "group-hover:text-[#6FBF5B]" },
+      // Jest va aquí, no en "aprendiendo": el hero ya dice "pruebas con Jest"
+      // y lo usa en AgriVision. El stack no puede desmentir al hero.
+      { Icon: SiJest, name: "Jest", hover: "group-hover:text-[#E8455A]" },
+      { Icon: SiGit, name: "Git", hover: "group-hover:text-[#F05032]" },
       { Icon: FaExchangeAlt, key: "restApis", hover: "group-hover:text-light-accent dark:group-hover:text-dark-accent" },
       { Icon: SiCloudinary, name: "Cloudinary", hover: "group-hover:text-[#7B8CE8]" },
       { Icon: SiTailwindcss, name: "Tailwind CSS", hover: "group-hover:text-[#06B6D4]" },
       { Icon: SiFigma, name: "Figma", hover: "group-hover:text-[#F24E1E]" },
-    ],
-  },
-  {
-    id: "academic",
-    items: [
       { Icon: FaJava, name: "Java", hover: "group-hover:text-[#E76F00]" },
       { Icon: SiPython, name: "Python", hover: "group-hover:text-[#5B9BD5]" },
       // Glifo del ciclo de sprint, no el logotipo de Scrum Alliance: usar la
@@ -60,7 +53,6 @@ const niveles = [
     id: "learning",
     items: [
       { Icon: SiTypescript, name: "TypeScript", hover: "group-hover:text-[#5B9BD5]" },
-      { Icon: SiJest, name: "Jest", hover: "group-hover:text-[#E8455A]" },
       { Icon: SiGithubactions, key: "cicd", hover: "group-hover:text-[#4D9BFF]" },
     ],
   },
@@ -75,7 +67,7 @@ export default function StackGrid() {
         {t("about.stack.title")}
       </h3>
 
-      <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
+      <dl className="space-y-6">
         {niveles.map(({ id, items }) => (
           <div key={id}>
             <dt className="font-mono text-xs uppercase tracking-[0.12em] text-light-accent dark:text-dark-accent mb-3">

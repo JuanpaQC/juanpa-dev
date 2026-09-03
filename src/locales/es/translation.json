@@ -37,10 +37,8 @@
     "stackLabel": "Tecnologías con las que trabajo",
     "stack": {
       "title": "Con qué trabajo",
-      "ships": "Entrego con",
-      "real": "Uso en proyectos reales",
-      "academic": "Base académica",
       "learning": "Aprendiendo ahora",
+      "works": "Tecnologías que uso",
       "items": {
         "restApis": "APIs REST",
         "oop": "Diseño orientado a objetos",
