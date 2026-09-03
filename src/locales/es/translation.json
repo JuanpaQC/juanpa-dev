@@ -38,13 +38,14 @@
     "stack": {
       "title": "Con qué trabajo",
       "ships": "Entrego con",
-      "shipsList": "React Native · Expo · Firebase · React · JavaScript · Git",
       "real": "Uso en proyectos reales",
-      "realList": "Node.js · APIs REST · Cloudinary · Tailwind · Figma",
       "academic": "Base académica",
-      "academicList": "Java · Python · Diseño orientado a objetos · Metodologías ágiles",
       "learning": "Aprendiendo ahora",
-      "learningList": "TypeScript · Testing · CI/CD"
+      "items": {
+        "restApis": "APIs REST",
+        "oop": "Diseño orientado a objetos",
+        "cicd": "CI/CD"
+      }
     },
     "craft": "Antes de programar hacía fotografía, y de ahí me quedó la costumbre de mirar el detalle: composición, contraste, qué sobra en el encuadre. Es la misma atención que aplico a una interfaz."
   },

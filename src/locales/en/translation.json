@@ -38,13 +38,14 @@
     "stack": {
       "title": "What I work with",
       "ships": "I ship with",
-      "shipsList": "React Native · Expo · Firebase · React · JavaScript · Git",
       "real": "Used in real projects",
-      "realList": "Node.js · REST APIs · Cloudinary · Tailwind · Figma",
       "academic": "University coursework",
-      "academicList": "Java · Python · Object-oriented design · Agile",
       "learning": "Learning now",
-      "learningList": "TypeScript · Testing · CI/CD"
+      "items": {
+        "restApis": "REST APIs",
+        "oop": "Object-oriented design",
+        "cicd": "CI/CD"
+      }
     },
     "craft": "Before I wrote code I did photography, and it left me with the habit of looking closely — composition, contrast, what doesn't belong in the frame. It's the same attention I bring to an interface."
   },
