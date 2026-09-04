@@ -108,6 +108,7 @@
     "toggleTheme": "Switch between light and dark mode",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
-    "homeLink": "Juanpa Quesada Caballero — go to home"
+    "homeLink": "Juanpa Quesada Caballero — go to home",
+    "language": "Language"
   }
 }

@@ -4,10 +4,11 @@ import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
 import LanguageToast from "../components/LanguageToast";
+import LanguageSwitch from "../components/LanguageSwitch";
 
 export default function Navbar() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [showNavbar, setShowNavbar] = useState(true);
   const [langChangedMsg, setLangChangedMsg] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,12 +29,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "es" ? "en" : "es";
-    i18n.changeLanguage(newLang);
-    localStorage.setItem("lang", newLang);
-    setLangChangedMsg(newLang === "es" ? "Idioma cambiado a Español" : "Language switched to English");
-  };
+  const avisarCambioIdioma = (lng) =>
+    setLangChangedMsg(lng === "es" ? "Idioma cambiado a Español" : "Language switched to English");
 
   return (
     <nav
@@ -97,17 +94,7 @@ export default function Navbar() {
               <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-all duration-500 ease-in-out ${darkMode ? 'translate-x-6' : 'translate-x-0'}`} />
             </button>
             <FaMoon className={`text-blue-300 transition-opacity ${darkMode ? 'opacity-100' : 'opacity-50'}`} />
-            <button
-              onClick={toggleLanguage}
-              aria-label={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
-              className="ml-1 hover:scale-110 transition-transform duration-300"
-            >
-              <img
-                src={i18n.language === "es" ? "/flags/us.png" : "/flags/es.png"}
-                alt={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
-                className="w-6 h-6 rounded-full border border-light-accent dark:border-dark-accent shadow-sm"
-              />
-            </button>
+            <LanguageSwitch onChange={avisarCambioIdioma} />
           </li>
         </ul>
       </div>
@@ -141,17 +128,7 @@ export default function Navbar() {
               <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-all duration-500 ease-in-out ${darkMode ? 'translate-x-6' : 'translate-x-0'}`} />
             </button>
             <FaMoon className={`text-blue-300 transition-opacity ${darkMode ? 'opacity-100' : 'opacity-50'}`} />
-            <button
-              onClick={toggleLanguage}
-              aria-label={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
-              className="ml-1 hover:scale-110 transition-transform duration-300"
-            >
-              <img
-                src={i18n.language === "es" ? "/flags/us.png" : "/flags/es.png"}
-                alt={i18n.language === "es" ? "Switch to English" : "Cambiar a español"}
-                className="w-6 h-6 rounded-full border border-light-accent dark:border-dark-accent shadow-sm"
-              />
-            </button>
+            <LanguageSwitch onChange={avisarCambioIdioma} grande />
           </li>
         </ul>
       )}
