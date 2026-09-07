@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { ThemeContext } from "./theme-context";
 
+/**
+ * El color de la barra de estado del móvil, por tema.
+ *
+ * Son los mismos que pinta <html> en index.css. Si se cambian ahí, hay que
+ * cambiarlos aquí: son los dos únicos sitios donde vive este color, y no se
+ * pueden leer de Tailwind desde JavaScript sin arrastrar la configuración
+ * entera al bundle.
+ */
+const COLOR_BARRA = { dark: "#0D1B2A", light: "#FAF8F4" };
+
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -20,6 +30,14 @@ export const ThemeProvider = ({ children }) => {
       root.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
+
+    // La barra de estado del móvil y la interfaz del navegador siguen al tema
+    // del sitio, no al del sistema operativo. Antes eran dos metas con
+    // `prefers-color-scheme`, así que con el sistema en claro y el sitio en
+    // oscuro la barra se quedaba clara. El script en línea de index.html pinta
+    // la primera; esta la actualiza en cada cambio.
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", COLOR_BARRA[darkMode ? "dark" : "light"]);
   }, [darkMode]);
 
   // Escucha cambios del sistema operativo

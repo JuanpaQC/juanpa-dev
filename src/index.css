@@ -11,10 +11,31 @@
        Sin JavaScript, o con movimiento reducido, los anclajes saltan de golpe,
        que es el comportamiento correcto en ambos casos. */
     overflow-x: hidden;
+
+    /* El fondo va aquí, en <html>, y no solo en el <div> de App.
+       El navegador propaga el fondo de <html> al "lienzo": esa zona que queda
+       fuera del documento y que se ve al pasarse de largo con el scroll
+       (el rebote elástico de macOS y de iOS). Con <html> sin fondo, el lienzo
+       se pinta del blanco por defecto, y ese era el blanco que asomaba por
+       arriba y por abajo. */
+    background-color: theme('colors.light-surface');
+
+    /* `color-scheme` es lo que le dice al navegador de qué color pintar todo lo
+       que dibuja él y no está en el DOM: el lienzo del rebote, las barras de
+       scroll y los controles nativos de formulario. Sin esto, en modo oscuro
+       las barras de scroll salían claras aunque el fondo fuera azul. */
+    color-scheme: light;
+  }
+
+  html.dark {
+    background-color: theme('colors.dark-background');
+    color-scheme: dark;
   }
 
   body {
     overflow-x: hidden;
+    /* Heredado, para que no haya dos sitios donde equivocarse. */
+    background-color: inherit;
   }
 
   /* Reglas mínimas que Lenis necesita, copiadas de su hoja de estilos en vez de
