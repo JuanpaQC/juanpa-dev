@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Navbar from "./Navbar";
 import { ThemeProvider } from "../context/ThemeContext";
 
@@ -40,5 +41,49 @@ describe("Navbar", () => {
     montar();
     const hamburguesa = screen.getAllByRole("button", { name: /men[uú]/i })[0];
     expect(hamburguesa).toHaveAttribute("aria-expanded", "false");
+  });
+
+  // El menú móvil pasó de aparecer de golpe a animarse. El cambio trajo dos
+  // riesgos que estas pruebas fijan.
+  describe("menú móvil", () => {
+    const abrir = async () => {
+      const usuario = userEvent.setup();
+      montar();
+      const boton = screen.getAllByRole("button", { name: /men[uú]/i })[0];
+      await usuario.click(boton);
+      return { usuario, boton };
+    };
+
+    it("los enlaces cuelgan de un <li>, no del <ul>", async () => {
+      await abrir();
+      const lista = document.getElementById("mobile-menu").querySelector("ul");
+      const hijosSueltos = [...lista.children].filter((n) => n.tagName !== "LI");
+      expect(hijosSueltos).toEqual([]);
+      expect(lista.querySelectorAll("li > a").length).toBe(4);
+    });
+
+    it("Escape lo cierra y devuelve el foco al botón", async () => {
+      const { usuario, boton } = await abrir();
+      expect(boton).toHaveAttribute("aria-expanded", "true");
+      await usuario.keyboard("{Escape}");
+      expect(boton).toHaveAttribute("aria-expanded", "false");
+      expect(boton).toHaveFocus();
+    });
+
+    // Se intentó dejar el menú montado con `inert` para poder animar la altura
+    // sin desmontar. Eso deja el interruptor de tema y el de idioma en el DOM
+    // de forma permanente, duplicando los del menú de escritorio.
+    //
+    // Abierto sí hay dos, y es correcto: en el navegador el breakpoint oculta
+    // uno de los dos menús con `display:none`, así que solo uno llega al árbol
+    // de accesibilidad. Aquí se ven los dos porque vitest corre con `css:
+    // false`. Lo que hay que fijar es el estado cerrado.
+    it("cerrado, no deja controles duplicados montados", async () => {
+      const { usuario, boton } = await abrir();
+      expect(screen.getAllByRole("switch")).toHaveLength(2);
+      await usuario.keyboard("{Escape}");
+      expect(boton).toHaveAttribute("aria-expanded", "false");
+      await waitFor(() => expect(screen.getAllByRole("switch")).toHaveLength(1));
+    });
   });
 });
