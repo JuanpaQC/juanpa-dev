@@ -65,8 +65,42 @@
       fetchpriority="high"
     />
 
-    <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <!-- Una sola meta, sin `media`, y la pinta el script de abajo.
+         Antes eran dos con media queries de `prefers-color-scheme`, y eso es lo
+         que hacía que la barra de estado del móvil no siguiera al sitio: el tema
+         aquí no lo manda el sistema operativo, lo manda la elección guardada en
+         localStorage. Con el sistema en claro y el sitio en oscuro, la barra se
+         quedaba clara.
+         Además el valor claro era #FFFFFF, blanco puro, cuando el fondo claro
+         del sitio es #FAF8F4. De ahí la barra blanca.
+         El valor por defecto es el claro porque sin JavaScript no se añade la
+         clase `dark` y el sitio se pinta en claro. -->
+    <meta name="theme-color" content="#FAF8F4" />
+
+    <script>
+      /* Tema antes del primer pintado.
+         La clase `dark` la ponía ThemeContext en un useEffect, o sea, después
+         de pintar. En cuanto <html> tiene fondo propio, ese retraso deja de ser
+         un detalle: quien usa modo oscuro veía un fotograma con el lienzo claro
+         antes de que React arrancara. Cuatro líneas aquí lo evitan.
+         Va en línea y sin `defer` a propósito: tiene que ejecutarse antes de
+         que el navegador pinte nada. */
+      (function () {
+        try {
+          var guardado = localStorage.getItem("theme");
+          var oscuro = guardado
+            ? guardado === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (oscuro) document.documentElement.classList.add("dark");
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", oscuro ? "#0D1B2A" : "#FAF8F4");
+        } catch (e) {
+          /* localStorage puede lanzar en modo privado de Safari. Si falla, se
+             queda el claro por defecto, que es exactamente lo que renderiza
+             React sin la clase. */
+        }
+      })();
+    </script>
 
     <!-- ============ OPEN GRAPH (LinkedIn, WhatsApp, Slack, Discord, Telegram) ============ -->
     <meta property="og:type" content="profile" />
