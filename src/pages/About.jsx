@@ -251,48 +251,59 @@ export default function About() {
           </div>
 
           {/* Referencias.
-              El hueco se queda; lo que se fue son las dos citas que estaban
-              firmadas como "Ana Rodríguez, UX Designer" y "Carlos Méndez, Dev
-              Team Lead" y no correspondían a nadie. Con `REFERENCIAS` vacío
-              esto no pinta nada en producción —una sección vacía es mejor que
-              una sección falsa— y en desarrollo deja un marcador visible para
-              que no se olvide. La forma del objeto está documentada en
-              src/data/referencias.js. */}
-          {(REFERENCIAS.length > 0 || import.meta.env.DEV) && (
-            <div ref={referenciasRef} className="space-y-6 w-full [perspective:1000px]">
-              <h3 className="font-display text-lg font-semibold tracking-[-0.01em]">
-                {t("about.references")}
-              </h3>
+              La sección se pinta siempre, con referencias o sin ellas. Estuvo
+              un rato detrás de `import.meta.env.DEV`, que es `false` en el
+              build: el hueco existía en el código y no en el sitio, que es
+              justo lo contrario de lo que hacía falta.
+              Lo que se fue son las dos citas firmadas como "Ana Rodríguez, UX
+              Designer" y "Carlos Méndez, Dev Team Lead", que no correspondían a
+              nadie. La forma del objeto está documentada en
+              src/data/referencias.js: en cuanto haya una real, sustituye al
+              estado vacío sola. */}
+          <div ref={referenciasRef} className="space-y-6 w-full [perspective:1000px]">
+            <h3 className="font-display text-lg font-semibold tracking-[-0.01em]">
+              {t("about.references")}
+            </h3>
 
-              {REFERENCIAS.map(({ id, cita, nombre, cargo, enlace }) => (
-                <blockquote
-                  key={id}
-                  data-reveal
-                  className="bg-light-surface dark:bg-dark-surface/30 p-6 rounded-xl border border-light-border dark:border-dark-subtle text-sm text-light-subtle dark:text-dark-subtle"
-                >
-                  {cita[idioma] ?? cita.es}
-                  <footer className="mt-3 text-right text-xs text-light-subtle dark:text-dark-subtle">
-                    — {enlace ? (
-                      <a href={enlace} target="_blank" rel="noopener noreferrer" className="underline">
-                        {nombre}
-                      </a>
-                    ) : nombre}
-                    , {cargo[idioma] ?? cargo.es}
-                  </footer>
-                </blockquote>
-              ))}
+            {REFERENCIAS.map(({ id, cita, nombre, cargo, enlace }) => (
+              <blockquote
+                key={id}
+                data-reveal
+                className="bg-light-surface dark:bg-dark-surface/30 p-6 rounded-xl border border-light-border dark:border-dark-subtle text-sm text-light-subtle dark:text-dark-subtle"
+              >
+                {cita[idioma] ?? cita.es}
+                <footer className="mt-3 text-right text-xs text-light-subtle dark:text-dark-subtle">
+                  — {enlace ? (
+                    <a href={enlace} target="_blank" rel="noopener noreferrer" className="underline">
+                      {nombre}
+                    </a>
+                  ) : nombre}
+                  , {cargo[idioma] ?? cargo.es}
+                </footer>
+              </blockquote>
+            ))}
 
-              {REFERENCIAS.length === 0 && (
+            {REFERENCIAS.length === 0 && (
+              <>
+                {/* Estado vacío. Ocupa el sitio y no afirma nada que no se
+                    pueda sostener: una frase de currículum, no un testimonio. */}
                 <p
                   data-reveal
-                  className="rounded-xl border border-dashed border-light-border-strong dark:border-dark-border-strong p-6 text-sm text-light-subtle dark:text-dark-subtle"
+                  className="rounded-xl border border-dashed border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/20 p-6 text-sm text-light-subtle dark:text-dark-subtle"
                 >
-                  Hueco reservado para referencias reales. Solo visible en
-                  desarrollo: añade objetos a <code className="font-mono">src/data/referencias.js</code>.
+                  {t("about.referencesEmpty")}
                 </p>
-              )}
-            </div>
-          )}
+
+                {/* Recordatorio solo para desarrollo: no se publica. */}
+                {import.meta.env.DEV && (
+                  <p className="font-mono text-xs text-light-subtle dark:text-dark-subtle">
+                    Añade objetos a <code>src/data/referencias.js</code> y esto se
+                    sustituye solo.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
 
           {/* El botón vivía en un `flex justify-end` sobre un contenedor que se
               encogía al contenido, así que `justify-end` no empujaba nada y
