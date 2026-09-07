@@ -24,8 +24,6 @@
     "rol": "Mobile development · React Native and Expo",
     "languages": "Native Spanish, professional English",
     "references": "References",
-    "referencesDescription#1": "\"Working with Juanpa was an excellent experience. He always proposes creative solutions and knows how to listen.\"",
-    "referencesDescription#2": "\"Juanpa is responsible, organized, and has great ability to solve technical problems calmly.\"",
     "timeline": {
       "2021": "Started Computer Engineering at TEC.",
       "2023": "Shipped my first mobile app with Expo and Firebase.",
@@ -110,5 +108,37 @@
     "closeMenu": "Close navigation menu",
     "homeLink": "Juanpa Quesada Caballero — go to home",
     "language": "Language"
+  },
+  "featured": {
+    "eyebrow": "Featured case",
+    "intro": "The largest project, told in full instead of summarised in a card.",
+    "steps": {
+      "criterio": {
+        "index": "01 · The constraint",
+        "title": "Cross-checking criteria by hand",
+        "body": "Classifying land use meant cross-checking national technical criteria by hand."
+      },
+      "flujo": {
+        "index": "02 · The flow",
+        "title": "Fourteen categories, guided",
+        "body": "The classification is walked through step by step, category by category, inside the app itself."
+      },
+      "campo": {
+        "index": "03 · In the field",
+        "title": "Location and background photo upload",
+        "body": "Every record is geolocated, and photos upload in the background."
+      },
+      "informe": {
+        "index": "04 · The deliverable",
+        "title": "The PDF report",
+        "body": "The result is generated as a PDF report once the walkthrough is done."
+      }
+    },
+    "pending": {
+      "title": "Still to write",
+      "decision": "The decision and the alternative you ruled out. Why a guided flow and not a free-form? What is lost?",
+      "evidence": "The evidence: screenshots of the real screens, or the generated PDF.",
+      "learned": "What you would change today."
+    }
   }
 }

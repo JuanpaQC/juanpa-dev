@@ -1,10 +1,8 @@
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  SiReact, SiExpo, SiFirebase, SiJavascript, SiGit, SiNodedotjs,
-  SiCloudinary, SiTailwindcss, SiFigma, SiTypescript, SiJest,
-  SiGithubactions, SiPython,
-} from "react-icons/si";
-import { FaExchangeAlt, FaSitemap, FaSyncAlt, FaJava } from "react-icons/fa";
+import useReveal from "../hooks/useReveal";
+import TechSphere from "./TechSphere";
+import { GRUPOS_STACK } from "../data/stack";
 
 /**
  * Stack por niveles, con logotipo y el nombre al pasar el cursor.
@@ -16,98 +14,80 @@ import { FaExchangeAlt, FaSitemap, FaSyncAlt, FaJava } from "react-icons/fa";
  * que sí está en el DOM para el rastreador y para el lector de pantalla, y el
  * tooltip visible va aparte marcado como decorativo.
  *
- * Los items no son focusables a propósito: serían 17 paradas de tabulación en
+ * Los items no son focusables a propósito: serían 18 paradas de tabulación en
  * una rejilla que no es interactiva, y quien navega con teclado o lector ya
  * recibe el nombre por el sr-only sin necesidad del tooltip.
  *
- * `name` va tal cual porque son marcas y no se traducen. `key` es para conceptos
- * que sí cambian de idioma.
+ * La lista vive en `src/data/stack.js` porque el globo del hero usa la misma.
  */
-const niveles = [
-  {
-    id: "works",
-    items: [
-      { Icon: SiReact, name: "React Native", hover: "group-hover:text-[#61DAFB]" },
-      { Icon: SiExpo, name: "Expo", hover: "group-hover:text-light-text dark:group-hover:text-white" },
-      { Icon: SiFirebase, name: "Firebase", hover: "group-hover:text-[#FFCA28]" },
-      { Icon: SiReact, name: "React", hover: "group-hover:text-[#61DAFB]" },
-      { Icon: SiJavascript, name: "JavaScript", hover: "group-hover:text-[#E8CE1B]" },
-      { Icon: SiNodedotjs, name: "Node.js", hover: "group-hover:text-[#6FBF5B]" },
-      // Jest va aquí, no en "aprendiendo": el hero ya dice "pruebas con Jest"
-      // y lo usa en AgriVision. El stack no puede desmentir al hero.
-      { Icon: SiJest, name: "Jest", hover: "group-hover:text-[#E8455A]" },
-      { Icon: SiGit, name: "Git", hover: "group-hover:text-[#F05032]" },
-      { Icon: FaExchangeAlt, key: "restApis", hover: "group-hover:text-light-accent dark:group-hover:text-dark-accent" },
-      { Icon: SiCloudinary, name: "Cloudinary", hover: "group-hover:text-[#7B8CE8]" },
-      { Icon: SiTailwindcss, name: "Tailwind CSS", hover: "group-hover:text-[#06B6D4]" },
-      { Icon: SiFigma, name: "Figma", hover: "group-hover:text-[#F24E1E]" },
-      { Icon: FaJava, name: "Java", hover: "group-hover:text-[#E76F00]" },
-      { Icon: SiPython, name: "Python", hover: "group-hover:text-[#5B9BD5]" },
-      // Glifo del ciclo de sprint, no el logotipo de Scrum Alliance: usar la
-      // marca de la organización insinuaría una certificación que no tiene.
-      { Icon: FaSyncAlt, name: "Scrum", hover: "group-hover:text-light-accent dark:group-hover:text-dark-accent" },
-      { Icon: FaSitemap, key: "oop", hover: "group-hover:text-light-accent dark:group-hover:text-dark-accent" },
-    ],
-  },
-  {
-    id: "learning",
-    items: [
-      { Icon: SiTypescript, name: "TypeScript", hover: "group-hover:text-[#5B9BD5]" },
-      { Icon: SiGithubactions, key: "cicd", hover: "group-hover:text-[#4D9BFF]" },
-    ],
-  },
-];
 
 export default function StackGrid() {
   const { t } = useTranslation();
+  const rejillaRef = useRef(null);
+
+  // La onda de entrada se queda solo para la fila de "aprendiendo". Los
+  // logotipos del globo no entran aquí a propósito: su posición la escribe el
+  // efecto de la esfera en cada frame, y un `from` de GSAP sobre el mismo
+  // transform lo pisaría —es el conflicto que ya está documentado en Card.jsx
+  // entre framer-motion y GSAP, con otros dos actores.
+  useReveal(rejillaRef, {
+    selector: '[data-grupo="learning"] li',
+    y: 14,
+    stagger: 0.03,
+    start: "top 92%",
+    porElemento: true,
+  });
 
   return (
     <div className="w-full">
-      <h3 className="font-display text-lg font-semibold tracking-[-0.01em] mb-5">
+      <h3 className="font-display text-lg font-semibold tracking-[-0.01em] mb-5 text-center">
         {t("about.stack.title")}
       </h3>
 
-      <dl className="space-y-6">
-        {niveles.map(({ id, items }) => (
-          <div key={id}>
-            <dt className="font-mono text-xs uppercase tracking-[0.12em] text-light-accent dark:text-dark-accent mb-3">
+      <dl ref={rejillaRef} className="space-y-8">
+        {GRUPOS_STACK.map(({ id, items }) => (
+          <div key={id} data-grupo={id}>
+            <dt className="font-mono text-xs uppercase tracking-[0.12em] text-light-accent dark:text-dark-accent mb-3 text-center">
               {t(`about.stack.${id}`)}
             </dt>
             <dd>
-              <ul className="flex flex-wrap gap-3">
-                {items.map(({ Icon, name, key, hover }) => {
-                  const etiqueta = name || t(`about.stack.items.${key}`);
-                  return (
-                    <li key={etiqueta} className="group relative">
-                      {/* En reposo van en tinta, no en color de marca. Siete
-                          logotipos con su color real caían por debajo de 3:1
-                          sobre el fondo oscuro —Jest a 1,52:1, Cloudinary a
-                          1,71:1— porque sus marcas son oscuras de origen. El
-                          color aparece al pasar el cursor, junto al nombre.
-                          Los tonos oscuros llevan una variante aclarada. */}
-                      <Icon
-                        aria-hidden="true"
-                        className={`text-3xl text-light-subtle dark:text-dark-subtle ${hover}
-                          transition duration-200 group-hover:-translate-y-0.5
-                          motion-reduce:transition-none motion-reduce:group-hover:translate-y-0`}
-                      />
-                      <span className="sr-only">{etiqueta}</span>
+              {/* Lo que ya domina va en el globo; lo que está aprendiendo se
+                  queda en una fila normal debajo. No es un capricho de
+                  maquetación: en el globo los logotipos flotan sueltos, sin un
+                  encabezado pegado al lado que los matice, y "TypeScript"
+                  girando entre los demás se lee como una más del montón. */}
+              {id === "works" ? (
+                <TechSphere items={items} />
+              ) : (
+                <ul className="flex flex-wrap justify-center gap-3">
+                  {items.map(({ Icon, name, key, hover }) => {
+                    const etiqueta = name || t(`about.stack.items.${key}`);
+                    return (
+                      <li key={etiqueta} className="group relative">
+                        <Icon
+                          aria-hidden="true"
+                          className={`text-3xl text-light-subtle dark:text-dark-subtle ${hover}
+                            transition duration-200 group-hover:-translate-y-0.5
+                            motion-reduce:transition-none motion-reduce:group-hover:translate-y-0`}
+                        />
+                        <span className="sr-only">{etiqueta}</span>
 
-                      <span
-                        aria-hidden="true"
-                        className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap
-                          rounded-md border border-light-border dark:border-dark-border
-                          bg-light-surface dark:bg-dark-background
-                          px-2 py-1 font-mono text-xs text-light-text dark:text-dark-text
-                          opacity-0 shadow-lg transition-opacity duration-150
-                          group-hover:opacity-100 motion-reduce:transition-none"
-                      >
-                        {etiqueta}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
+                        <span
+                          aria-hidden="true"
+                          className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap
+                            rounded-md border border-light-border dark:border-dark-border
+                            bg-light-surface dark:bg-dark-background
+                            px-2 py-1 font-mono text-xs text-light-text dark:text-dark-text
+                            opacity-0 shadow-lg transition-opacity duration-150
+                            group-hover:opacity-100 motion-reduce:transition-none"
+                        >
+                          {etiqueta}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </dd>
           </div>
         ))}

@@ -1,18 +1,28 @@
 import { motion, useAnimation, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import FloatingParticles from "../components/FloatingParticles";
+import HeroAvatar from "../components/HeroAvatar";
+import useHeroScroll from "../hooks/useHeroScroll";
 
 export default function Home() {
   const { t } = useTranslation();
   const controls = useAnimation();
-  const menosMovimiento = useReducedMotion();
+  const menosMovimientoFM = useReducedMotion();
+
+  const seccionRef = useRef(null);
+  const fondoRef = useRef(null);
+  const textoRef = useRef(null);
+  const subtituloRef = useRef(null);
+  const botonRef = useRef(null);
+  const avatarRef = useRef(null);
 
   useEffect(() => {
     async function animateAvatar() {
       // El avatar es el elemento LCP. No se anima la opacidad: el navegador no
       // registra el LCP hasta que el píxel es opaco, y el fundido de 1 s que había
       // aquí antes se sumaba entero a la métrica.
-      if (menosMovimiento) {
+      if (menosMovimientoFM) {
         controls.set({ y: 0 });
         return;
       }
@@ -34,7 +44,9 @@ export default function Home() {
     }
 
     animateAvatar();
-  }, [controls, menosMovimiento]);
+  }, [controls, menosMovimientoFM]);
+
+  useHeroScroll({ seccionRef, fondoRef, textoRef, subtituloRef, botonRef, avatarRef });
 
   const [typedText, setTypedText] = useState('');
   const [showFinalName, setShowFinalName] = useState(false);
@@ -43,7 +55,7 @@ export default function Home() {
   useEffect(() => {
     // Con menos movimiento pedido, se salta el tecleo entero: eran 3,4 s de
     // texto moviéndose en la primera pantalla.
-    if (menosMovimiento) {
+    if (menosMovimientoFM) {
       setTypedText(fullCode);
       setShowFinalName(true);
       return;
@@ -62,16 +74,18 @@ export default function Home() {
       }
     }, 100);
     return () => clearInterval(interval);
-  }, [menosMovimiento]);
+  }, [menosMovimientoFM]);
 
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full px-6 flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between gap-10 text-light-text dark:bg-dark-background dark:text-dark-text transition-colors pt-40 md:pt-28"
+      ref={seccionRef}
+      className="relative min-h-screen w-full px-6 flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between gap-10 overflow-hidden text-light-text dark:bg-dark-background dark:text-dark-text transition-colors pt-40 md:pt-28"
     >
       {/* Imagen de fondo */}
       <div
-        className="absolute inset-0 bg-cover bg-center z-0"
+        ref={fondoRef}
+        className="absolute inset-0 bg-cover bg-center z-0 will-change-transform"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
@@ -81,12 +95,16 @@ export default function Home() {
       {/* Overlay azul/turquesa translúcido para dark mode */}
       <div className="absolute inset-0 bg-white/85 dark:bg-[#0D1B2A]/80 backdrop-blur-sm z-10" />
 
+      {/* Capa decorativa: va por encima del velo, si no quedaría tapada por el
+          80-85% de opacidad del overlay, pero por debajo del contenido.
+          El globo de tecnologías se ha mudado a About: aquí se cruzaba con el
+          avatar y repetía una lista que ya estaba tres pantallas más abajo. */}
+      <FloatingParticles className="z-20 hidden md:block" />
+
       {/* Texto */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="z-10 md:w-[48%] lg:ml-20 text-left space-y-6"
+      <div
+        ref={textoRef}
+        className="z-30 md:w-[48%] lg:ml-20 text-left space-y-6"
       >
         {/* El <h1> existe desde el primer frame. Antes solo aparecía al terminar
             la animación, a los ~3,7 s: hasta entonces la página no tenía
@@ -125,37 +143,43 @@ export default function Home() {
           )}
         </h1>
 
-        <p className="text-lg md:text-xl text-light-subtle dark:text-dark-subtle">
+        {/* En claro va en tinta, no en el gris sutil. El velo blanco al 85% del
+            hero se compone sobre una foto casi negra, así que el fondo real no
+            es crema sino un gris de ~#DFDFDE, y sobre él `light-subtle`
+            (#6B665D) se queda en torno a 4.2:1 —por debajo del 4.5:1 de AA—.
+            No es un fallo de tokens: los tokens entre sí están bien, y por eso
+            el ADR 0004 no lo cazó. El fondo variable es lo que lo rompe.
+            En oscuro el gris sutil sí pasa de sobra y se queda como estaba. */}
+        <p
+          ref={subtituloRef}
+          className="text-lg md:text-xl text-light-text dark:text-dark-subtle"
+        >
           {t("home.subtitle")}
         </p>
 
-        <motion.a
-          href="#projects"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-block bg-light-accent text-white dark:bg-dark-accent dark:text-black px-6 py-3 rounded-lg font-semibold text-lg transition"
-        >
-          {t("home.button")}
-        </motion.a>
-      </motion.div>
-
-      {/* Avatar */}
-      <div className="relative z-10 md:w-1/2 flex justify-center items-center mt-[-20px] md:mt-0">
-        <div className="absolute w-[300px] h-[300px] bg-[#00F6ED] rounded-full blur-3xl opacity-30 z-0" />
-        <motion.img
-          src="/avatar-juanpa-700.webp"
-          srcSet="/avatar-juanpa-350.webp 350w, /avatar-juanpa-700.webp 700w"
-          sizes="(max-width: 768px) 250px, 350px"
-          alt="Juanpa Quesada Caballero"
-          width="350"
-          height="350"
-          fetchPriority="high"
-          decoding="async"
-          initial={{ y: 30 }}
-          animate={controls}
-          className="relative z-10 w-full max-w-[250px] md:max-w-[300px] lg:max-w-[350px] h-auto drop-shadow-[0_0_12px_#00F6ED80]"
-        />
+        {/* El <div> es de GSAP y el <a> de framer-motion. Tenerlos en el mismo
+            nodo no funciona: GSAP pinta el estado inicial del `from` (opacidad
+            0) nada más crearse el efecto, framer lo lee como el valor base del
+            elemento al montar su VisualElement, y a partir de ahí lo reescribe
+            en cada render. Como el hero re-renderiza en cada letra del tecleo,
+            el botón se quedaba invisible para siempre. Medido en el navegador:
+            opacity 0 permanente hasta separar los dos nodos. */}
+        <div ref={botonRef} className="inline-block">
+          <motion.a
+            href="#projects"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block bg-light-accent text-white dark:bg-dark-accent dark:text-black px-6 py-3 rounded-lg font-semibold text-lg transition"
+          >
+            {t("home.button")}
+          </motion.a>
+        </div>
       </div>
+
+      {/* Avatar. El contenedor es el que anima el scroll y el <img> el que
+          flota: si las dos animaciones escribieran el transform del mismo nodo,
+          la última en ejecutarse borraría a la otra. */}
+      <HeroAvatar contenedorRef={avatarRef} areaRef={seccionRef} controls={controls} />
     </section>
   );
 }

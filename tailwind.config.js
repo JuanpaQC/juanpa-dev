@@ -48,6 +48,28 @@ export default {
         sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
+
+      // Animaciones de fondo, todas en CSS. Lo que se repite para siempre no
+      // debe depender de un requestAnimationFrame vivo: el bloque de
+      // prefers-reduced-motion de index.css las detiene sin código extra.
+      keyframes: {
+        // Solo transform: mover 'top' obligaria a rehacer el layout en cada
+        // frame por cada mota.
+        flotar: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -18px, 0)' },
+        },
+        'gradient-breathe': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+      },
+      animation: {
+        // La duracion real de cada mota se sobrescribe en linea desde
+        // FloatingParticles; esta es solo el valor por defecto.
+        flotar: 'flotar 12s ease-in-out infinite',
+        'gradient-breathe': 'gradient-breathe 8s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

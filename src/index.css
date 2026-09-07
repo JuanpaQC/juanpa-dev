@@ -5,12 +5,36 @@
 /* Scroll suave y evitar scroll horizontal */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* `scroll-behavior: smooth` ya no está aquí: el scroll suave lo lleva Lenis
+       (ver components/SmoothScroll.jsx) y las dos cosas a la vez se pelean —el
+       navegador anima el scrollTop mientras Lenis lo reescribe en cada frame.
+       Sin JavaScript, o con movimiento reducido, los anclajes saltan de golpe,
+       que es el comportamiento correcto en ambos casos. */
     overflow-x: hidden;
   }
 
   body {
     overflow-x: hidden;
+  }
+
+  /* Reglas mínimas que Lenis necesita, copiadas de su hoja de estilos en vez de
+     importarla: son cuatro líneas y así no hay que depender de una ruta interna
+     del paquete. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
   }
 
   /* Red de seguridad de foco: ningún elemento interactivo debe quedar sin
@@ -30,9 +54,16 @@
   .dark button:focus-visible,
   .dark input:focus-visible,
   .dark textarea:focus-visible,
-  .dark select:focus-visible,
   .dark [tabindex]:focus-visible {
     outline-color: theme('colors.dark-accent');
+  }
+
+  /* SmoothScroll pone tabindex="-1" en la sección de destino para trasladarle
+     el foco al pulsar un ancla. Ese foco es programático, no del teclado, así
+     que dibujar el contorno alrededor de una sección entera sería ruido: el
+     :focus-visible de arriba ya cubre la navegación real con teclado. */
+  section[tabindex="-1"]:focus {
+    outline: none;
   }
 }
 
@@ -64,6 +95,8 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-blink { animation: none; opacity: 1; }
     .animate-marquee { animation: none; }
+    .animate-flotar { animation: none; }
+    .animate-gradient-breathe { animation: none; }
     *,
     *::before,
     *::after {
@@ -72,5 +105,70 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+/* ── Material de vidrio ──────────────────────────────────────────────────
+   Las ventanas de macOS del sitio usaban tres tratamientos distintos: los
+   perfiles de Contacto iban en el azul de marca (#0D1B2A) y las tarjetas de
+   proyecto y el marco de la foto en grises neutros sueltos (#1e1e1e, #2c2c2e,
+   gray-500/600/700). De ahí que "se vieran muy diferentes en color". Ahora hay
+   un solo material y sale de aquí.
+
+   La capa se tiñe hacia el color de la sección que tiene detrás, no hacia un
+   gris: así el desenfoque y el brillo del borde son lo que se nota, y la
+   luminancia apenas se mueve. Medido sobre los fondos reales, el texto sutil
+   queda en 6.14:1 (oscuro) y 5.42:1 (claro) —en claro mejora, porque el vidrio
+   aclara el fondo—.
+
+   `backdrop-filter` no se anima nunca: recompone la capa entera en cada frame
+   en el que cambia. Aquí es estático.
+   ────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  :root {
+    --vidrio-fondo:  rgba(255, 255, 255, .62);
+    --vidrio-barra:  rgba(233, 228, 216, .72);
+    --vidrio-borde:  rgba(58, 58, 45, .14);
+    --vidrio-luz:    rgba(255, 255, 255, .85);
+    --vidrio-sombra: 0 12px 32px -14px rgba(58, 58, 45, .38);
+  }
+
+  .dark {
+    --vidrio-fondo:  rgba(23, 40, 58, .70);
+    --vidrio-barra:  rgba(15, 29, 44, .82);
+    /* El borde en oscuro es luz, no tinta: un borde oscuro sobre un fondo
+       oscuro no dibuja el canto del cristal, lo borra. */
+    --vidrio-borde:  rgba(255, 255, 255, .10);
+    --vidrio-luz:    rgba(255, 255, 255, .08);
+    --vidrio-sombra: 0 12px 32px -14px rgba(0, 0, 0, .6);
+  }
+
+  .vidrio {
+    background-color: var(--vidrio-fondo);
+    border: 1px solid var(--vidrio-borde);
+    /* La línea interior de arriba es el reflejo especular del canto. Es lo que
+       hace que se lea como una lámina con grosor y no como un rectángulo
+       translúcido. */
+    box-shadow: inset 0 1px 0 0 var(--vidrio-luz), var(--vidrio-sombra);
+  }
+
+  .vidrio-barra {
+    background-color: var(--vidrio-barra);
+    border-bottom: 1px solid var(--vidrio-borde);
+  }
+
+  /* El desenfoque va aparte para poder no ponerlo donde no compensa. La
+     saturación al 180% es lo que evita que lo que hay detrás se vea lavado, que
+     es la diferencia entre un desenfoque y un material. */
+  .vidrio-desenfoque {
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+  }
+
+  /* Sin soporte de backdrop-filter, la capa translúcida sobre un fondo de
+     color parecido se ve turbia. Mejor opaca. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :root { --vidrio-fondo: #FAF8F4; --vidrio-barra: #EFE9DC; }
+    .dark { --vidrio-fondo: #142435; --vidrio-barra: #0F1D2C; }
   }
 }

@@ -1,9 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import Card from "../components/Card";
+import SplitReveal from "../components/SplitReveal";
 import { useTranslation } from "react-i18next";
+import useReveal from "../hooks/useReveal";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -11,6 +13,15 @@ export default function Contact() {
   const [toast, setToast] = useState({ show: false, type: "", text: "" });
   const [enviando, setEnviando] = useState(false);
   const { t } = useTranslation();
+
+  const formularioRef = useRef(null);
+  const redesRef = useRef(null);
+
+  // Los campos entran desde la izquierda, uno detrás de otro, como si alguien
+  // los fuera colocando. 100 ms entre cada uno: cuatro elementos, medio segundo
+  // en total, que es lo que aguanta antes de parecer que la página va lenta.
+  useReveal(formularioRef, { x: -28, y: 0, stagger: 0.1, start: "top 85%" });
+  useReveal(redesRef, { y: 26, stagger: 0.12, start: "top 85%" });
 
   useEffect(() => {
     fetch("https://api.github.com/users/JuanpaQC")
@@ -57,30 +68,61 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="scroll-mt-32 min-h-screen w-full px-6 py-20 flex flex-col items-center bg-light-background text-light-text dark:bg-dark-surface dark:text-dark-text transition-colors"
+      className="scroll-mt-32 relative overflow-hidden min-h-screen w-full px-6 py-20 flex flex-col items-center bg-light-background text-light-text dark:bg-dark-surface dark:text-dark-text transition-colors"
     >
-      <motion.h2
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.5 }}
-        className="font-display text-2xl md:text-[1.75rem] font-bold tracking-[-0.022em] mb-16 text-center text-light-text dark:text-dark-text"
-      >
-        {t("contact.title")}
-      </motion.h2>
+      {/* Fondo que respira. Son dos capas, una por tema, y no comparten color
+          por una razón medida.
+          En claro, teñir el fondo crema con el acento (#00695E) al 9% lo
+          oscurece y el texto sutil #6B665D pasa de 5.02:1 a 4.41:1 —por debajo
+          del 4.5:1 que exige WCAG AA para texto normal—. El fondo claro solo
+          admite luces, no sombras: aquí el degradado es un blanco cálido, que
+          aclara y por tanto sube el ratio en vez de bajarlo.
+          En oscuro sí es el cian: sobre #0A1520 deja el texto sutil en 5.95:1,
+          bajando desde 7.17:1 pero con margen de sobra. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 animate-gradient-breathe dark:hidden"
+        style={{
+          backgroundImage:
+            "radial-gradient(55% 45% at 22% 28%, rgba(255,255,255,0.55), transparent 62%), radial-gradient(45% 38% at 78% 72%, rgba(255,252,244,0.4), transparent 62%)",
+          backgroundSize: "180% 180%",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 hidden animate-gradient-breathe dark:block"
+        style={{
+          backgroundImage:
+            "radial-gradient(55% 45% at 22% 28%, rgba(0,246,237,0.09), transparent 62%), radial-gradient(45% 38% at 78% 72%, rgba(0,246,237,0.06), transparent 62%)",
+          backgroundSize: "180% 180%",
+        }}
+      />
 
-      <div className="w-full max-w-7xl flex flex-col md:flex-row gap-20 items-start justify-center">
+      <SplitReveal
+        as="h2"
+        texto={t("contact.title")}
+        className="relative font-display text-2xl md:text-[1.75rem] font-bold tracking-[-0.022em] mb-4 text-center text-light-text dark:text-dark-text"
+      />
+
+      {/* La frase que dice qué busca. Estaba escrita y traducida en los dos
+          idiomas desde hacía tiempo y no se pintaba en ninguna parte: es el
+          objetivo declarado del sitio, así que va inmediatamente debajo del
+          encabezado y no enterrada más abajo.
+          62ch es el límite de línea que ya usa el párrafo de About; más ancho
+          y el ojo pierde el renglón al saltar. */}
+      <p className="relative mb-14 max-w-[62ch] text-center text-base md:text-lg text-light-subtle dark:text-dark-subtle">
+        {t("contact.lead")}
+      </p>
+
+      <div className="relative w-full max-w-7xl flex flex-col md:flex-row gap-20 items-start justify-center">
         {/* Formulario */}
-        <motion.form
+        <form
+          ref={formularioRef}
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.5 }}
           className="w-full md:w-1/2 space-y-8"
         >
           {["name", "email", "message"].map((field) => (
-            <div key={field} className="flex flex-col">
+            <div key={field} data-reveal className="flex flex-col">
               <label htmlFor={field} className="mb-2 text-base font-semibold">
                 {field === "name"
                   ? t("contact.form.name")
@@ -112,33 +154,35 @@ export default function Contact() {
             </div>
           ))}
 
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            type="submit"
-            disabled={enviando}
-            aria-busy={enviando}
-            className="w-full bg-light-accent text-white dark:bg-dark-accent dark:text-black py-4 rounded-xl font-bold text-lg tracking-wider transition disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {enviando ? t("contact.form.sending") : t("contact.form.button")}
-          </motion.button>
-        </motion.form>
+          {/* data-reveal va en el <div>, no en el <motion.button>: el que anima
+              con GSAP y el que anima con framer-motion tienen que ser nodos
+              distintos. Compartiéndolo, framer toma la opacidad 0 del estado
+              inicial de GSAP como valor base y la reescribe en cada render —y
+              este formulario re-renderiza en cada tecla. */}
+          <div data-reveal>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              type="submit"
+              disabled={enviando}
+              aria-busy={enviando}
+              className="w-full bg-light-accent text-white dark:bg-dark-accent dark:text-black py-4 rounded-xl font-bold text-lg tracking-wider transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {enviando ? t("contact.form.sending") : t("contact.form.button")}
+            </motion.button>
+          </div>
+        </form>
 
         {/* Redes sociales */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.5 }}
-          className="w-full md:w-1/2 flex flex-col"
-        >
-          <p className="text-2xl font-semibold mb-4 text-center md:text-left">
+        <div ref={redesRef} className="w-full md:w-1/2 flex flex-col">
+          <p data-reveal className="text-2xl font-semibold mb-4 text-center md:text-left">
             {t("contact.social.title")}
           </p>
 
           <div className="flex flex-col gap-5 w-full">
             {githubProfile && (
               <Card
+                data-reveal
                 platform="GitHub"
                 name={`@${githubProfile.login}`}
                 username={t("contact.social.repos", { n: githubProfile.public_repos })}
@@ -148,6 +192,7 @@ export default function Contact() {
               />
             )}
             <Card
+              data-reveal
               platform="LinkedIn"
               name="in/juanpaquesadacaballero"
               username={t("contact.social.linkedinTag")}
@@ -155,6 +200,7 @@ export default function Contact() {
               link="https://www.linkedin.com/in/juanpaquesadacaballero/"
             />
             <Card
+              data-reveal
               platform="Gmail"
               name="jpqcaballero@gmail.com"
               username={t("contact.social.mailTag")}
@@ -162,7 +208,7 @@ export default function Contact() {
               link="mailto:jpqcaballero@gmail.com"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Footer */}
@@ -171,7 +217,7 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.5 }}
-        className="mt-20 text-center text-xs text-light-subtle dark:text-dark-subtle"
+        className="relative mt-20 text-center text-xs text-light-subtle dark:text-dark-subtle"
       >
         {t("contact.footer", { year: new Date().getFullYear() })}
       </motion.div>

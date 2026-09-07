@@ -5,6 +5,9 @@ import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
 import LanguageToast from "../components/LanguageToast";
 import LanguageSwitch from "../components/LanguageSwitch";
+import ScrollProgress from "../components/ScrollProgress";
+
+const SECCIONES = ["home", "about", "projects", "contact"];
 
 export default function Navbar() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
@@ -12,6 +15,8 @@ export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [langChangedMsg, setLangChangedMsg] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [desplazado, setDesplazado] = useState(false);
+  const [seccionActiva, setSeccionActiva] = useState("home");
 
   // La posición anterior va en una ref, no en estado: como estado obligaba a
   // re-registrar el listener de scroll en cada evento y provocaba un render
@@ -23,10 +28,40 @@ export default function Navbar() {
       const currentScrollY = window.scrollY;
       const bajando = currentScrollY > lastScrollY.current;
       setShowNavbar(!(bajando && currentScrollY > 80));
+      // Booleano, no un valor continuo: el plan pedía subir el desenfoque de 4
+      // a 16 px de forma progresiva con el scroll, pero backdrop-filter obliga
+      // a recomponer la capa entera en cada frame en el que cambia, y son 16 px
+      // de blur sobre todo el ancho del navbar. Dos estados dan el mismo efecto
+      // percibido y solo repintan dos veces en toda la página.
+      setDesplazado(currentScrollY > 40);
       lastScrollY.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Sección visible. Con IntersectionObserver y no con la posición del scroll:
+  // el estado solo cambia cuatro veces en toda la página, así que no hay un
+  // render por frame.
+  useEffect(() => {
+    if (typeof IntersectionObserver !== "function") return;
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        const visible = entradas
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setSeccionActiva(visible.target.id);
+      },
+      // El margen superior descuenta el navbar: sin él, la sección que asoma
+      // por debajo de la barra ya cuenta como activa.
+      { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.25, 0.5] }
+    );
+
+    const nodos = SECCIONES.map((id) => document.getElementById(id)).filter(Boolean);
+    for (const nodo of nodos) observador.observe(nodo);
+
+    return () => observador.disconnect();
   }, []);
 
   const avisarCambioIdioma = (lng) =>
@@ -36,11 +71,13 @@ export default function Navbar() {
     <nav
       className={`fixed top-4 left-1/2 transform -translate-x-1/2 w-[98%] md:w-[90%] lg:w-[80%] px-6 py-4 z-50 rounded-2xl shadow-xl transition-transform duration-300 ease-in-out
         text-light-text dark:text-dark-text border border-light-border dark:border-dark-border
-        backdrop-blur-md bg-light-surface/80 dark:bg-dark-background/80
+        ${desplazado ? "backdrop-blur-xl bg-light-surface/90 dark:bg-dark-background/90" : "backdrop-blur-md bg-light-surface/80 dark:bg-dark-background/80"}
         motion-reduce:transition-none
         ${showNavbar || menuOpen ? "translate-y-0" : "-translate-y-[150%]"}`}
       style={{ boxShadow: '0 0 20px rgba(0, 246, 237, 0.1)' }}
     >
+      <ScrollProgress />
+
       <div className="container mx-auto flex justify-between items-center gap-6">
         {/* El logotipo no es el encabezado de la página: era un segundo <h1> que
             competía con el del hero. Ahora es un enlace al inicio. */}
@@ -67,16 +104,34 @@ export default function Navbar() {
 
         {/* Opciones Desktop */}
         <ul className="hidden md:flex space-x-5 lg:space-x-6 items-center font-mono text-sm lg:text-base">
-          {['home', 'about', 'projects', 'contact'].map((id) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className="relative group whitespace-nowrap transition-colors duration-100 ease-in-out"
-            >
-              <span className="group-hover:text-light-accent dark:group-hover:text-dark-accent transition-colors duration-300">{t(`navbar.${id}`)}</span>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-light-accent dark:bg-dark-accent transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          ))}
+          {SECCIONES.map((id) => {
+            const activa = seccionActiva === id;
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                // aria-current es lo que convierte el subrayado en información:
+                // sin él, quien usa lector de pantalla no tiene forma de saber
+                // en qué sección está.
+                aria-current={activa ? "true" : undefined}
+                className="relative group whitespace-nowrap transition-colors duration-100 ease-in-out"
+              >
+                <span
+                  className={`transition-colors duration-300 group-hover:text-light-accent dark:group-hover:text-dark-accent ${
+                    activa ? "text-light-accent dark:text-dark-accent" : ""
+                  }`}
+                >
+                  {t(`navbar.${id}`)}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-0 -bottom-1 h-0.5 bg-light-accent dark:bg-dark-accent transition-all duration-300 group-hover:w-full ${
+                    activa ? "w-full" : "w-0"
+                  }`}
+                />
+              </a>
+            );
+          })}
 
           <li className="flex items-center gap-3">
             <FaSun className={`text-yellow-400 transition-opacity ${darkMode ? 'opacity-50' : 'opacity-100'}`} />
@@ -102,11 +157,14 @@ export default function Navbar() {
       {/* Menú Móvil */}
       {menuOpen && (
         <ul id="mobile-menu" className="flex flex-col space-y-4 mt-4 px-4 md:hidden text-black dark:text-white">
-          {['home', 'about', 'projects', 'contact'].map((id) => (
+          {SECCIONES.map((id) => (
             <a
               key={id}
               href={`#${id}`}
-              className="text-lg font-semibold"
+              aria-current={seccionActiva === id ? "true" : undefined}
+              className={`text-lg font-semibold ${
+                seccionActiva === id ? "text-light-accent dark:text-dark-accent" : ""
+              }`}
               onClick={() => setMenuOpen(false)}
             >
               {t(`navbar.${id}`)}

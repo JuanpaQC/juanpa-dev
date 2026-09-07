@@ -24,8 +24,6 @@
     "rol": "Desarrollo móvil · React Native y Expo",
     "languages": "Español nativo, inglés profesional",
     "references": "Referencias",
-    "referencesDescription#1": "\"Trabajar con Juanpa fue una experiencia excelente. Siempre propone soluciones creativas y sabe escuchar.\"",
-    "referencesDescription#2": "\"Juanpa es responsable, ordenado y tiene una gran capacidad para resolver problemas técnicos con calma.\"",
     "timeline": {
       "2021": "Entré a Ingeniería en Computación en el TEC.",
       "2023": "Publiqué mi primera app móvil con Expo y Firebase.",
@@ -110,5 +108,37 @@
     "closeMenu": "Cerrar menú de navegación",
     "homeLink": "Juanpa Quesada Caballero — ir al inicio",
     "language": "Idioma"
+  },
+  "featured": {
+    "eyebrow": "Caso destacado",
+    "intro": "El proyecto más grande, contado entero en vez de resumido en una tarjeta.",
+    "steps": {
+      "criterio": {
+        "index": "01 · La restricción",
+        "title": "Cruzar criterios a mano",
+        "body": "Clasificar el uso del suelo exigía cruzar a mano criterios técnicos nacionales."
+      },
+      "flujo": {
+        "index": "02 · El flujo",
+        "title": "Catorce categorías, guiadas",
+        "body": "La clasificación se recorre paso a paso, categoría por categoría, dentro de la propia app."
+      },
+      "campo": {
+        "index": "03 · En campo",
+        "title": "Ubicación y fotos en segundo plano",
+        "body": "Cada registro queda geolocalizado, y las fotos se suben en segundo plano."
+      },
+      "informe": {
+        "index": "04 · El entregable",
+        "title": "El informe en PDF",
+        "body": "El resultado se genera como informe en PDF al terminar el recorrido."
+      }
+    },
+    "pending": {
+      "title": "Lo que falta escribir",
+      "decision": "La decisión y la alternativa que descartaste. ¿Por qué un flujo guiado y no un formulario libre? ¿Qué se pierde?",
+      "evidence": "La prueba: capturas de las pantallas reales, o el PDF generado.",
+      "learned": "Qué cambiarías hoy."
+    }
   }
 }

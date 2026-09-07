@@ -37,6 +37,13 @@ if (!window.IntersectionObserver) {
 
 if (!window.scrollTo) window.scrollTo = () => {};
 
+// jsdom no trae contexto de canvas (haría falta el paquete `canvas`) y avisa por
+// consola cada vez que alguien lo pide. Scene3D ya se rinde si getContext
+// devuelve null; esto solo evita que el aviso ensucie la salida de los tests.
+if (typeof HTMLCanvasElement !== "undefined") {
+  HTMLCanvasElement.prototype.getContext = () => null;
+}
+
 afterEach(() => {
   cleanup();
   localStorage.clear();
