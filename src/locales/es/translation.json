@@ -43,7 +43,8 @@
         "cicd": "CI/CD"
       }
     },
-    "craft": "Antes de programar hacía fotografía, y de ahí me quedó la costumbre de mirar el detalle: composición, contraste, qué sobra en el encuadre. Es la misma atención que aplico a una interfaz."
+    "craft": "Antes de programar hacía fotografía, y de ahí me quedó la costumbre de mirar el detalle: composición, contraste, qué sobra en el encuadre. Es la misma atención que aplico a una interfaz.",
+    "referencesEmpty": "Disponibles a petición."
   },
   "projects": {
     "title": "Proyectos",
